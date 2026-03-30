@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — NEET Design Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Libre+Franklin:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   CSS CUSTOM PROPERTIES
+   ============================================ */
+:root {
+  --bg: #f9f7f4;
+  --bg-dark: #e8e2da;
+  --bg-card: #f3efe9;
+  --text: #2c2c2c;
+  --text-light: #6b6560;
+  --text-muted: #9a938c;
+  --accent: #7299AE;
+  --accent-hover: #5a8499;
+  --border: #d4dde2;
+  --white: #ffffff;
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans: 'Libre Franklin', 'Helvetica Neue', Arial, sans-serif;
+  --container: 1400px;
+  --margin: 60px;
+  --section-gap: 90px;
+  --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover { color: var(--accent); }
+
+ul { list-style: none; }
+
+/* ============================================
+   LAYOUT UTILITIES
+   ============================================ */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--margin);
+}
+
+.section {
+  padding: var(--section-gap) 0;
+}
+
+/* ============================================
+   NAVBAR
+   ============================================ */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--bg);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: box-shadow 0.3s ease;
+}
+
+.navbar.scrolled {
+  box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.navbar__logo {
+  display: block;
+  height: 42px;
+  width: auto;
+}
+
+.navbar__logo img {
+  height: 100%;
+  width: auto;
+  display: block;
+}
+
+.navbar__links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.navbar__links a {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.navbar__cta {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 10px 24px;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.navbar__cta:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+}
+
+.navbar__mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.navbar__mobile-toggle svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--text);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+/* ============================================
+   PAGE HERO
+   ============================================ */
+.page-hero {
+  padding: 80px 0 60px;
+  text-align: center;
+}
+
+.page-hero__label {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.page-hero__title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 20px;
+}
+
+.page-hero__desc {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-light);
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   GALLERY
+   ============================================ */
+.gallery__filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+.gallery__filter-btn {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.gallery__filter-btn:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.gallery__filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+}
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.gallery__item {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.gallery__item.hidden {
+  opacity: 0;
+  transform: scale(0.85);
+  pointer-events: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.gallery__item-inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.gallery__item-inner:hover {
+  border-color: var(--accent);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.gallery__item-inner img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  transform: scale(1.03);
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gallery__item-inner:hover img {
+  transform: scale(1.08);
+}
+
+.gallery__item-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery__item-inner:hover .gallery__item-overlay {
+  opacity: 1;
+}
+
+.gallery__zoom-icon {
+  width: 32px;
+  height: 32px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 4px;
+}
+
+.gallery__item-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--white);
+  text-align: center;
+}
+
+.gallery__item-badge {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  padding: 4px 14px;
+}
+
+/* ============================================
+   LIGHTBOX
+   ============================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.lightbox__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  z-index: 10;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 36px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  line-height: 1;
+}
+
+.lightbox__close:hover { color: var(--white); }
+
+.lightbox__prev,
+.lightbox__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lightbox__prev { left: 24px; }
+.lightbox__next { right: 24px; }
+
+.lightbox__prev:hover,
+.lightbox__next:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.lightbox__prev svg,
+.lightbox__next svg {
+  width: 24px;
+  height: 24px;
+  color: var(--white);
+}
+
+.lightbox__content {
+  position: relative;
+  z-index: 5;
+  max-width: 80vw;
+  max-height: 85vh;
+  text-align: center;
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 75vh;
+  border-radius: 4px;
+  object-fit: contain;
+  transition: opacity 0.25s ease;
+}
+
+.lightbox__info {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.lightbox__title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--white);
+}
+
+.lightbox__badge {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 4px 14px;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  background: var(--bg-dark);
+  padding: 48px 0 24px;
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.5fr;
+  gap: 40px;
+  margin-bottom: 32px;
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer__brand-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer__brand-top img {
+  height: 36px;
+  width: auto;
+}
+
+.footer__brand-desc {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-light);
+}
+
+.footer__col-title {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.footer__col ul { display: flex; flex-direction: column; gap: 10px; }
+
+.footer__col a {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-light);
+  transition: color var(--transition);
+}
+
+.footer__col a:hover { color: var(--accent); }
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-light);
+  transition: color var(--transition);
+}
+
+.footer__social-link:hover { color: var(--accent); }
+
+.footer__social-link svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--text-muted);
+  fill: none;
+  stroke-width: 1.5;
+  flex-shrink: 0;
+  transition: stroke var(--transition);
+}
+
+.footer__social-link:hover svg {
+  stroke: var(--accent);
+}
+
+.footer__newsletter-form {
+  position: relative;
+  display: flex;
+  margin-top: 4px;
+}
+
+.footer__newsletter-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-right: none;
+  border-radius: 6px 0 0 6px;
+  outline: none;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text);
+  padding: 10px 14px;
+  transition: border-color var(--transition);
+}
+
+.footer__newsletter-input::placeholder {
+  color: var(--text-muted);
+}
+
+.footer__newsletter-input:focus {
+  border-color: var(--accent);
+}
+
+.footer__newsletter-btn {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 10px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition);
+}
+
+.footer__newsletter-btn:hover {
+  background: var(--accent-hover);
+}
+
+.footer__bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.footer__copyright {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+/* ============================================
+   REVEAL ANIMATIONS
+   ============================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.06s; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.12s; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.18s; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.24s; }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.3s; }
+.reveal-stagger.visible > *:nth-child(7) { transition-delay: 0.36s; }
+.reveal-stagger.visible > *:nth-child(8) { transition-delay: 0.42s; }
+
+.reveal-stagger.visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  :root {
+    --margin: 36px;
+    --section-gap: 64px;
+  }
+
+  .gallery__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --margin: 20px;
+    --section-gap: 50px;
+  }
+
+  .navbar__links, .navbar__cta { display: none; }
+  .navbar__mobile-toggle { display: block; }
+  .navbar__inner { height: 64px; }
+  .navbar__logo { height: 36px; }
+
+  .page-hero { padding: 50px 0 40px; }
+
+  .gallery__grid { grid-template-columns: 1fr; }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .lightbox__prev { left: 8px; }
+  .lightbox__next { right: 8px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <a href="studio-site.html" class="navbar__logo"><img src="images/portfolio/logo-rev.png" alt="NEET Design Group"></a>
+    <ul class="navbar__links">
+      <li><a href="studio-site.html#read">Read</a></li>
+      <li><a href="studio-site.html#watch">Watch</a></li>
+      <li><a href="studio-site.html#shop">Shop</a></li>
+      <li><a href="studio-site.html#portfolio">Studio</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="navbar__cta">Contact Us</a>
+    <button class="navbar__mobile-toggle" aria-label="Menu">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ===================== PAGE HERO ===================== -->
+<section class="page-hero">
+  <div class="container reveal">
+    <div class="page-hero__label">Portfolio</div>
+    <h1 class="page-hero__title">Our Work Speaks Before We Do</h1>
+    <p class="page-hero__desc">Explore our collection of stunning interiors and creative work — from kitchens and living rooms to commercial spaces.</p>
+  </div>
+</section>
+
+<!-- ===================== GALLERY ===================== -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <!-- Filter Buttons -->
+    <div class="gallery__filters reveal" role="group" aria-label="Gallery categories">
+      <button class="gallery__filter-btn active" data-filter="Kitchen">Kitchen</button>
+      <button class="gallery__filter-btn" data-filter="Living Room">Living Room</button>
+      <button class="gallery__filter-btn" data-filter="Bedroom">Bedroom</button>
+      <button class="gallery__filter-btn" data-filter="Bathroom">Bathroom</button>
+      <button class="gallery__filter-btn" data-filter="Outdoor">Outdoor</button>
+      <button class="gallery__filter-btn" data-filter="Commercial">Commercial</button>
+
+      <button class="gallery__filter-btn" data-filter="All">All</button>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="gallery__grid" id="galleryGrid" role="list" aria-label="Gallery items">
+<!-- KITCHENS -->
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kitchen-1.jpg" alt="White Shaker Kitchen">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">White Shaker Kitchen</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kitchen-2.jpg" alt="Two-Tone Island Kitchen">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Two-Tone Island Kitchen</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kitchen-3.jpg" alt="Cherry Cabinet Kitchen">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Cherry Cabinet Kitchen</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kitchen-4.jpg" alt="Kitchen Dining Nook">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Kitchen Dining Nook</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kitchen-5.jpg" alt="Galley Kitchen">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Galley Kitchen</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-10.jpg" alt="Bold Blue Granite Kitchen">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Bold Blue Granite Kitchen</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-11.jpg" alt="Bold Blue Granite Kitchen">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Bold Blue Granite Kitchen</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-12.jpg" alt="Bold Blue Granite Kitchen">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Bold Blue Granite Kitchen</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-19.jpg" alt="Coastal Blue &amp; White Kitchen">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Coastal Blue &amp; White Kitchen</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-20.jpg" alt="Blue Tile Wet Bar">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Blue Tile Wet Bar</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-21.jpg" alt="Wet Bar &amp; Wine Station">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Wet Bar &amp; Wine Station</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-22.jpg" alt="Living Room with Bar Area">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Living Room with Bar Area</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-28.jpg" alt="Cherry Cabinet Kitchen">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Cherry Cabinet Kitchen</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-29.jpg" alt="Cherry Kitchen with Wall Ovens">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Cherry Kitchen with Wall Ovens</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-30.jpg" alt="Gold Faucet Kitchen Detail">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Gold Faucet Kitchen Detail</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-31.jpg" alt="Blue Hex Tile Kitchenette">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Blue Hex Tile Kitchenette</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-32.jpg" alt="Modern Kitchenette">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Modern Kitchenette</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-34.jpg" alt="White Kitchen with Gold Hardware">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">White Kitchen with Gold Hardware</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-35.jpg" alt="Marble Backsplash Kitchen">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Marble Backsplash Kitchen</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Kitchen" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-36.jpg" alt="Kitchen Galley View">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Kitchen Galley View</h3>
+            <span class="gallery__item-badge">Kitchen</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIVING ROOMS -->
+      <div class="gallery__item" data-category="Living Room" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/living-room-2.jpg" alt="High Ceiling Lounge">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">High Ceiling Lounge</h3>
+            <span class="gallery__item-badge">Living Room</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Living Room" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/living-room-3.jpg" alt="Stone Media Wall">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Stone Media Wall</h3>
+            <span class="gallery__item-badge">Living Room</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Living Room" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/living-room-4.jpg" alt="Formal Dining &amp; Living">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Formal Dining &amp; Living</h3>
+            <span class="gallery__item-badge">Living Room</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery__item" data-category="Living Room" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-23.jpg" alt="Open Plan Kitchen Bar">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Open Plan Kitchen Bar</h3>
+            <span class="gallery__item-badge">Living Room</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Living Room" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-25.jpg" alt="Open Kitchen with Range Hood">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Open Kitchen with Range Hood</h3>
+            <span class="gallery__item-badge">Living Room</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Living Room" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-26.jpg" alt="Butler's Pantry">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Butler's Pantry</h3>
+            <span class="gallery__item-badge">Living Room</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Living Room" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-27.jpg" alt="Coastal Wet Bar">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Coastal Wet Bar</h3>
+            <span class="gallery__item-badge">Living Room</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Living Room" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/kit-37.jpg" alt="Open Plan Kitchen &amp; Living">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Open Plan Kitchen &amp; Living</h3>
+            <span class="gallery__item-badge">Living Room</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BEDROOMS -->
+      <div class="gallery__item" data-category="Bedroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bedroom-1.jpg" alt="Grasscloth Primary Suite">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Grasscloth Primary Suite</h3>
+            <span class="gallery__item-badge">Bedroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bedroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bedroom-2.jpg" alt="Blue Accent Bedroom">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Blue Accent Bedroom</h3>
+            <span class="gallery__item-badge">Bedroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bedroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bedroom-4.jpg" alt="Boho Bedroom">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Boho Bedroom</h3>
+            <span class="gallery__item-badge">Bedroom</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BATHROOMS -->
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bathroom-1.jpg" alt="Spa Blue Tub Suite">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Spa Blue Tub Suite</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bathroom-2.jpg" alt="Floral Tile Vanity">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Floral Tile Vanity</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bathroom-3.jpg" alt="Vessel Sink Vanity">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Vessel Sink Vanity</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bathroom-4.jpg" alt="Chevron Accent Bath">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Chevron Accent Bath</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bathroom-5.jpg" alt="Modern White Bath">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Modern White Bath</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bathroom-6.jpg" alt="Octagonal Mirror Vanity">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Octagonal Mirror Vanity</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bathroom-7.jpg" alt="Botanical Powder Room">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Botanical Powder Room</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-10.jpg" alt="Rustic Stone Vestibule">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Rustic Stone Vestibule</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-11.jpg" alt="Palm Frond Powder Room">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Palm Frond Powder Room</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-12.jpg" alt="Palm Frond Powder Room">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Palm Frond Powder Room</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-13.jpg" alt="Coastal Breeze Master Bath">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Coastal Breeze Master Bath</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-14.jpg" alt="Coastal Breeze Master Bath">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Coastal Breeze Master Bath</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-15.jpg" alt="Gilded Concrete Spa">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Gilded Concrete Spa</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-16.jpg" alt="Gilded Concrete Spa">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Gilded Concrete Spa</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-17.jpg" alt="Gilded Concrete Spa">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Gilded Concrete Spa</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-18.jpg" alt="Gilded Concrete Spa">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Gilded Concrete Spa</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-19.jpg" alt="Gilded Concrete Spa">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Gilded Concrete Spa</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-20.jpg" alt="Chevron &amp; Onyx Master Bath">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Chevron &amp; Onyx Master Bath</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-21.jpg" alt="Gilded Concrete Spa">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Gilded Concrete Spa</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-22.jpg" alt="Geometric Glow Powder Room">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Geometric Glow Powder Room</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-23.jpg" alt="Botanical Retreat">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Botanical Retreat</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-24.jpg" alt="Botanical Retreat">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Botanical Retreat</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-25.jpg" alt="Chevron &amp; Onyx Master Bath">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Chevron &amp; Onyx Master Bath</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-26.jpg" alt="Chevron &amp; Onyx Master Bath">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Chevron &amp; Onyx Master Bath</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-27.jpg" alt="Chevron &amp; Onyx Master Bath">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Chevron &amp; Onyx Master Bath</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-28.jpg" alt="Chevron &amp; Onyx Master Bath">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Chevron &amp; Onyx Master Bath</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-29.jpg" alt="Chevron &amp; Onyx Master Bath">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Chevron &amp; Onyx Master Bath</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-30.jpg" alt="Chevron &amp; Onyx Master Bath">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Chevron &amp; Onyx Master Bath</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-31.jpg" alt="Chevron &amp; Onyx Master Bath">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Chevron &amp; Onyx Master Bath</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-32.jpg" alt="Live-Edge Rustic Bath">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Live-Edge Rustic Bath</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-33.jpg" alt="Live-Edge Rustic Bath">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Live-Edge Rustic Bath</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-34.jpg" alt="Driftwood Walk-In Shower">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Driftwood Walk-In Shower</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-35.jpg" alt="Driftwood Walk-In Shower">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Driftwood Walk-In Shower</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-36.jpg" alt="Cobalt Rainfall Shower">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Cobalt Rainfall Shower</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-39.jpg" alt="Floral Glam Vanity">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Floral Glam Vanity</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-40.jpg" alt="Indigo Tub Sanctuary">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Indigo Tub Sanctuary</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-41.jpg" alt="Greek Key Powder Room">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Greek Key Powder Room</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Bathroom" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/bath-42.jpg" alt="Cobalt Rainfall Shower">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Cobalt Rainfall Shower</h3>
+            <span class="gallery__item-badge">Bathroom</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- OUTDOOR -->
+      <div class="gallery__item" data-category="Outdoor" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/outdoor-1.jpg" alt="Desert Cabana Retreat">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Desert Cabana Retreat</h3>
+            <span class="gallery__item-badge">Outdoor</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Outdoor" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/outdoor-2.jpg" alt="Backyard Putting Green">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Backyard Putting Green</h3>
+            <span class="gallery__item-badge">Outdoor</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Outdoor" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/outdoor-3.jpg" alt="Hot Tub Gazebo">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Hot Tub Gazebo</h3>
+            <span class="gallery__item-badge">Outdoor</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMMERCIAL -->
+      <div class="gallery__item" data-category="Commercial" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/commercial-1.jpg" alt="Eyediology Reception">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Eyediology Reception</h3>
+            <span class="gallery__item-badge">Commercial</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Commercial" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/commercial-2.jpg" alt="Executive Conference Room">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Executive Conference Room</h3>
+            <span class="gallery__item-badge">Commercial</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Commercial" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/commercial-3.jpg" alt="Private Office">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Private Office</h3>
+            <span class="gallery__item-badge">Commercial</span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__item" data-category="Commercial" role="listitem">
+        <div class="gallery__item-inner">
+          <img src="images/portfolio/commercial-4.jpg" alt="Office Break Room">
+          <div class="gallery__item-overlay">
+            <svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>
+            <h3 class="gallery__item-title">Office Break Room</h3>
+            <span class="gallery__item-badge">Commercial</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== LIGHTBOX ===================== -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <div class="lightbox__overlay"></div>
+  <button class="lightbox__close" aria-label="Close">&times;</button>
+  <button class="lightbox__prev" aria-label="Previous image">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="lightbox__next" aria-label="Next image">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 6 15 12 9 18"/></svg>
+  </button>
+  <div class="lightbox__content">
+    <img class="lightbox__img" id="lightboxImg" src="" alt="">
+    <div class="lightbox__info">
+      <h3 class="lightbox__title" id="lightboxTitle"></h3>
+      <span class="lightbox__badge" id="lightboxBadge"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer__grid">
+
+      <!-- Company Info -->
+      <div class="footer__brand">
+        <div class="footer__brand-top">
+          <img src="images/portfolio/logo-rev.png" alt="NEET Design Group">
+        </div>
+        <p class="footer__brand-desc">This is not decoration. This is decision-making. We guide every detail before anything is purchased so your home comes together exactly as it should.</p>
+      </div>
+
+      <!-- Useful Links -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">Useful Links</h4>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="studio-site.html#portfolio">Gallery</a></li>
+          <li><a href="studio-site.html#testimonials">Client Stories</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Follow Us -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">Follow Us</h4>
+        <ul>
+          <li>
+            <a href="#" class="footer__social-link">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+              <span>Instagram</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="footer__social-link">
+              <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" fill="none"/></svg>
+              <span>Facebook</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="footer__social-link">
+              <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733-16z" fill="none"/><path d="M4 20l6.768-6.768" fill="none"/><path d="M20 4l-6.768 6.768" fill="none"/></svg>
+              <span>X (Twitter)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">Subscribe to Our Newsletter</h4>
+        <form class="footer__newsletter-form" onsubmit="return false;">
+          <input class="footer__newsletter-input" type="email" placeholder="Your email address" aria-label="Email for newsletter" required>
+          <button class="footer__newsletter-btn" type="submit">Subscribe</button>
+        </form>
+      </div>
+
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__copyright">&copy; 2026 NEET Design Group. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script>
+// Navbar scroll shadow
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+// Intersection Observer for reveal animations
+const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -40px 0px' };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+
+// Gallery filter
+const filterBtns = document.querySelectorAll('.gallery__filter-btn');
+const galleryItems = document.querySelectorAll('.gallery__item');
+
+function applyFilter(filter) {
+  galleryItems.forEach(item => {
+    if (filter === 'All' || item.dataset.category === filter) {
+      item.classList.remove('hidden');
+    } else {
+      item.classList.add('hidden');
+    }
+  });
+}
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilter(btn.dataset.filter);
+  });
+});
+
+// Apply filter from URL parameter or default active button
+const urlFilter = new URLSearchParams(window.location.search).get('filter');
+if (urlFilter) {
+  filterBtns.forEach(b => b.classList.remove('active'));
+  const matchBtn = [...filterBtns].find(b => b.dataset.filter === urlFilter);
+  if (matchBtn) matchBtn.classList.add('active');
+  applyFilter(urlFilter);
+} else {
+  const activeBtn = document.querySelector('.gallery__filter-btn.active');
+  if (activeBtn) applyFilter(activeBtn.dataset.filter);
+}
+
+// Lightbox
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxTitle = document.getElementById('lightboxTitle');
+const lightboxBadge = document.getElementById('lightboxBadge');
+let currentLightboxIndex = 0;
+
+function getVisibleItems() {
+  return [...document.querySelectorAll('.gallery__item:not(.hidden)')];
+}
+
+function openLightbox(index) {
+  const items = getVisibleItems();
+  if (index < 0 || index >= items.length) return;
+  currentLightboxIndex = index;
+  const item = items[index];
+  const img = item.querySelector('img');
+  const title = item.querySelector('.gallery__item-title');
+  const badge = item.querySelector('.gallery__item-badge');
+  lightboxImg.src = img.src;
+  lightboxImg.alt = img.alt;
+  lightboxTitle.textContent = title.textContent;
+  lightboxBadge.textContent = badge.textContent;
+  lightbox.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function lightboxNext() {
+  const items = getVisibleItems();
+  currentLightboxIndex = (currentLightboxIndex + 1) % items.length;
+  openLightbox(currentLightboxIndex);
+}
+
+function lightboxPrev() {
+  const items = getVisibleItems();
+  currentLightboxIndex = (currentLightboxIndex - 1 + items.length) % items.length;
+  openLightbox(currentLightboxIndex);
+}
+
+document.querySelectorAll('.gallery__item-inner').forEach(inner => {
+  inner.addEventListener('click', () => {
+    const item = inner.closest('.gallery__item');
+    const items = getVisibleItems();
+    const index = items.indexOf(item);
+    openLightbox(index);
+  });
+});
+
+lightbox.querySelector('.lightbox__close').addEventListener('click', closeLightbox);
+lightbox.querySelector('.lightbox__overlay').addEventListener('click', closeLightbox);
+lightbox.querySelector('.lightbox__next').addEventListener('click', (e) => { e.stopPropagation(); lightboxNext(); });
+lightbox.querySelector('.lightbox__prev').addEventListener('click', (e) => { e.stopPropagation(); lightboxPrev(); });
+
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') lightboxNext();
+  if (e.key === 'ArrowLeft') lightboxPrev();
+});
+
+</script>
+
+</body>
+</html>

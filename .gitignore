@@ -1,0 +1,16 @@
+# Environment and credentials
+.env
+credentials.json
+token.json
+
+# Temp files
+.tmp/
+
+# Large screenshot files (root level only)
+/screencapture-*.png
+
+# OS files
+.DS_Store
+
+# Workspace files
+*.code-workspace

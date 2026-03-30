@@ -1,0 +1,2580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEET Design Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Libre+Franklin:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   CSS CUSTOM PROPERTIES
+   ============================================ */
+:root {
+  --bg: #f9f7f4;
+  --bg-dark: #e8e2da;
+  --bg-card: #f3efe9;
+  --text: #2c2c2c;
+  --text-light: #6b6560;
+  --text-muted: #9a938c;
+  --accent: #7299AE;
+  --accent-hover: #5a8499;
+  --border: #d4dde2;
+  --white: #ffffff;
+  --serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans: 'Libre Franklin', 'Helvetica Neue', Arial, sans-serif;
+  --container: 1400px;
+  --margin: 60px;
+  --section-gap: 90px;
+  --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover { color: var(--accent); }
+
+ul { list-style: none; }
+
+/* ============================================
+   LAYOUT UTILITIES
+   ============================================ */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--margin);
+}
+
+.section {
+  padding: var(--section-gap) 0;
+}
+
+/* ============================================
+   SECTION HEADERS
+   ============================================ */
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.section-label {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--text);
+}
+
+.btn-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 8px 20px;
+  transition: all var(--transition);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.btn-view-all:hover {
+  border-color: var(--text);
+  color: var(--text);
+  background: rgba(0,0,0,0.03);
+}
+
+/* ============================================
+   SCROLLABLE ROW
+   ============================================ */
+.scroll-row {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+
+.scroll-row::-webkit-scrollbar { display: none; }
+
+.scroll-row > * { scroll-snap-align: start; }
+
+/* ============================================
+   NAVBAR
+   ============================================ */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--bg);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: box-shadow 0.3s ease;
+}
+
+.navbar.scrolled {
+  box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.navbar__logo {
+  display: block;
+  height: 42px;
+  width: auto;
+}
+
+.navbar__logo img {
+  height: 100%;
+  width: auto;
+  display: block;
+  /* logo is already monochrome */
+}
+
+.navbar__links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.navbar__links a {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text);
+  position: relative;
+}
+
+.navbar__links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--text);
+  transition: width var(--transition);
+}
+
+.navbar__links a:hover::after { width: 100%; background: var(--accent); }
+.navbar__links a:hover { color: var(--accent); }
+
+.navbar__cta {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 10px 24px;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.navbar__cta:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+}
+
+.navbar__mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.navbar__mobile-toggle svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--text);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero__image-wrap {
+  position: relative;
+  width: 100%;
+  height: clamp(520px, 62vw, 800px);
+  overflow: hidden;
+}
+
+.hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+}
+
+.hero__content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--margin);
+  max-width: var(--container);
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.hero__label {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.hero__title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 72px);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+
+.hero__title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero__subtitle {
+  font-family: var(--sans);
+  font-size: clamp(14px, 1.2vw, 16px);
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.8);
+  max-width: 440px;
+  margin-bottom: 32px;
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 28px;
+  padding: 14px 32px;
+  transition: all var(--transition);
+  width: fit-content;
+}
+
+.hero__cta:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+}
+
+.hero__categories {
+  display: flex;
+  justify-content: center;
+  gap: clamp(16px, 3vw, 40px);
+  padding: 30px 20px;
+  flex-wrap: wrap;
+}
+
+.hero__category {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: transform var(--transition);
+}
+
+.hero__category:hover { transform: translateY(-3px); }
+.hero__category:hover .hero__category-label { color: var(--accent); }
+
+.hero__category-img {
+  width: clamp(120px, 13vw, 180px);
+  height: clamp(120px, 13vw, 180px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--white);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.hero__category-label {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  text-align: center;
+  transition: color var(--transition);
+}
+
+/* ============================================
+   BLOG CARDS
+   ============================================ */
+.blog-card {
+  flex: 0 0 280px;
+  cursor: pointer;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.blog-card__image-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  margin-bottom: 14px;
+  aspect-ratio: 4/3;
+}
+
+.blog-card__image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.03);
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.blog-card:hover .blog-card__image-wrap img {
+  transform: scale(1.07);
+}
+
+.blog-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.blog-card__category {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.blog-card__date {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+.blog-card__meta-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.blog-card__title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--text);
+  margin-bottom: 8px;
+  transition: color var(--transition);
+}
+
+.blog-card:hover .blog-card__title { color: var(--accent); }
+
+.blog-card__excerpt {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--text-light);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ============================================
+   MONTHLY MUSINGS
+   ============================================ */
+.musings {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 50px;
+  align-items: start;
+}
+
+.musings__featured-img {
+  width: 100%;
+  aspect-ratio: 5/4;
+  object-fit: cover;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+
+.musings__featured-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.musings__featured-title {
+  font-family: var(--serif);
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 300;
+  line-height: 1.25;
+  margin-bottom: 14px;
+}
+
+.musings__featured-excerpt {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+
+.musings__read-more {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.musings__read-more:hover { color: var(--accent-hover); }
+
+.musings__sidebar-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.musings__sidebar-card {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+
+.musings__sidebar-card:hover { opacity: 0.75; }
+
+.musings__sidebar-card-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 2px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.musings__sidebar-card-cat {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.musings__sidebar-card-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--text);
+}
+
+/* ============================================
+   MEET NEET
+   ============================================ */
+.meet-neet-section {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 0;
+  align-items: stretch;
+  background: var(--white);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+}
+
+.meet-neet-section__photo {
+  position: relative;
+  overflow: hidden;
+  min-height: 600px;
+}
+
+.meet-neet-section__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.meet-neet-section:hover .meet-neet-section__photo img {
+  transform: scale(1.04);
+}
+
+.meet-neet-section__photo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%;
+  background: linear-gradient(to top, rgba(0,0,0,0.08), transparent);
+  pointer-events: none;
+}
+
+.meet-neet-section__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(32px, 4vw, 64px) clamp(28px, 4vw, 56px);
+}
+
+.meet-neet__label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.meet-neet__label::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.meet-neet__name {
+  font-family: var(--serif);
+  font-size: clamp(32px, 3.5vw, 46px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 28px;
+  border-bottom: none;
+  padding-bottom: 0;
+  font-style: normal;
+}
+
+.meet-neet__text {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.meet-neet__text:first-of-type::first-line {
+  color: var(--text);
+  font-weight: 400;
+}
+
+.meet-neet__credentials {
+  list-style: none;
+  margin-top: 28px;
+  padding-top: 0;
+  border-top: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.meet-neet__credentials li {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--text-light);
+  padding: 18px 20px 18px 52px;
+  position: relative;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: background var(--transition), transform var(--transition);
+  border-radius: 4px;
+}
+
+.meet-neet__credentials li:first-child {
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.meet-neet__credentials li:hover {
+  background: var(--bg);
+  transform: translateX(4px);
+}
+
+.meet-neet__credentials li::before {
+  content: '';
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(114, 153, 174, 0.12);
+  border: 1.5px solid var(--accent);
+}
+
+.meet-neet__credentials li::after {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.meet-neet__credentials li strong {
+  color: var(--text);
+  font-weight: 600;
+  display: block;
+  font-size: 14.5px;
+  margin-bottom: 2px;
+}
+
+/* ============================================
+   ARTICLES GRID
+   ============================================ */
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+.article-card { cursor: pointer; }
+
+.article-card__img-wrap {
+  overflow: hidden;
+  border-radius: 2px;
+  margin-bottom: 14px;
+  aspect-ratio: 4/3;
+}
+
+.article-card__img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.article-card:hover .article-card__img-wrap img { transform: scale(1.04); }
+
+.article-card__cat {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.article-card__title {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--text);
+  transition: color var(--transition);
+}
+
+.article-card:hover .article-card__title { color: var(--accent); }
+
+/* ============================================
+   VIDEO CARDS
+   ============================================ */
+.video-card {
+  flex: 0 0 280px;
+  cursor: pointer;
+}
+
+.video-card__thumb {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  margin-bottom: 14px;
+  aspect-ratio: 16/10;
+}
+
+.video-card__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.video-card:hover .video-card__thumb img { transform: scale(1.04); }
+
+.video-card__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  background: rgba(255,255,255,0.92);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.video-card:hover .video-card__play {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.video-card__play svg {
+  width: 16px;
+  height: 16px;
+  fill: var(--text);
+  margin-left: 2px;
+}
+
+.video-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.video-card__cat {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.video-card__duration {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.video-card__title {
+  font-family: var(--serif);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.35;
+  transition: color var(--transition);
+}
+
+.video-card:hover .video-card__title { color: var(--accent); }
+
+/* ============================================
+   COLLABORATIONS
+   ============================================ */
+.collabs-row {
+  display: flex;
+  justify-content: center;
+  gap: clamp(24px, 4vw, 56px);
+  flex-wrap: wrap;
+}
+
+.collab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: transform var(--transition);
+}
+
+.collab-item:hover { transform: translateY(-4px); }
+
+.collab-item__circle {
+  width: clamp(72px, 8vw, 100px);
+  height: clamp(72px, 8vw, 100px);
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.collab-item:hover .collab-item__circle {
+  border-color: var(--text-muted);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+
+.collab-item__circle svg {
+  width: 36px;
+  height: 36px;
+  stroke: var(--text-light);
+  fill: none;
+  stroke-width: 1;
+}
+
+.collab-item__name {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--text-light);
+}
+
+/* ============================================
+   PORTFOLIO
+   ============================================ */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.portfolio-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  aspect-ratio: 3/4;
+  cursor: pointer;
+}
+
+.portfolio-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.portfolio-card:hover img { transform: scale(1.06); }
+
+.portfolio-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20,18,15,0.85) 0%, rgba(20,18,15,0.2) 50%, rgba(20,18,15,0.05) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px;
+  transition: background var(--transition);
+}
+
+.portfolio-card:hover .portfolio-card__overlay {
+  background: linear-gradient(to top, rgba(20,18,15,0.9) 0%, rgba(20,18,15,0.35) 50%, rgba(20,18,15,0.1) 100%);
+}
+
+.portfolio-card__tag {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 8px;
+}
+
+.portfolio-card__name {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2vw, 26px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.25;
+  margin-bottom: 6px;
+}
+
+.portfolio-card__location {
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.04em;
+}
+
+.portfolio-card__arrow {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all var(--transition);
+}
+
+.portfolio-card:hover .portfolio-card__arrow {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.portfolio-card__arrow svg {
+  width: 14px;
+  height: 14px;
+  stroke: var(--white);
+  fill: none;
+  stroke-width: 1.5;
+}
+
+/* ============================================
+   APPROACH SECTION
+   ============================================ */
+.approach {
+  padding: var(--section-gap) 0;
+  background: var(--white);
+}
+
+.approach__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.approach__header {
+  position: relative;
+}
+
+.approach__label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.approach__label::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.approach__title {
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.2vw, 42px);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.approach__intro {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-light);
+  border-left: 2px solid var(--accent);
+  padding-left: 20px;
+}
+
+.approach__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  counter-reset: approach-step;
+}
+
+.approach__step {
+  counter-increment: approach-step;
+  position: relative;
+  padding: 24px 24px 24px 80px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: background var(--transition), transform var(--transition);
+  border-radius: 4px;
+}
+
+.approach__step:first-child {
+  border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.approach__step:hover {
+  background: var(--bg);
+  transform: translateX(4px);
+}
+
+.approach__step::before {
+  content: counter(approach-step, decimal-leading-zero);
+  position: absolute;
+  left: 16px;
+  top: 18px;
+  font-family: var(--serif);
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--accent);
+  opacity: 0.45;
+}
+
+.approach__step-text {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-light);
+}
+
+.approach__step-text strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.approach__result {
+  margin-top: 32px;
+  padding: 28px 32px;
+  background: var(--bg);
+  border-radius: 6px;
+  border-left: 3px solid var(--accent);
+}
+
+.approach__result p {
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .approach__inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+/* ============================================
+   CTA STUDIO
+   ============================================ */
+.studio-cta {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.studio-cta__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.studio-cta__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 24, 20, 0.72);
+}
+
+.studio-cta__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 60px 40px;
+  max-width: 680px;
+}
+
+.studio-cta__label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 16px;
+}
+
+.studio-cta__title {
+  font-family: var(--serif);
+  font-size: clamp(30px, 3.5vw, 46px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+
+.studio-cta__desc {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 30px;
+}
+
+.btn-learn-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 28px;
+  padding: 14px 32px;
+  transition: all var(--transition);
+}
+
+.btn-learn-more:hover {
+  background: var(--accent);
+  color: var(--white);
+  border-color: var(--accent);
+}
+
+/* ============================================
+   INSTAGRAM FEED
+   ============================================ */
+.insta-section { padding-bottom: var(--section-gap); }
+
+.insta-header {
+  margin-bottom: 32px;
+}
+
+.insta-header__top {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 300;
+  line-height: 1.15;
+}
+
+.insta-header__handle {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-light);
+}
+
+.insta-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+}
+
+.insta-item {
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.insta-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.insta-item:hover img { transform: scale(1.06); }
+
+.insta-item__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.insta-item:hover .insta-item__overlay {
+  background: rgba(0,0,0,0.15);
+}
+
+.insta-item__icon {
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+}
+
+.insta-item:hover .insta-item__icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.insta-item__icon svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  background: var(--bg-dark);
+  padding: 48px 0 24px;
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.5fr;
+  gap: 40px;
+  margin-bottom: 32px;
+}
+
+/* Column 1: Company info */
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.footer__brand-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer__brand-top img {
+  height: 36px;
+  width: auto;
+}
+
+.footer__brand-name {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.footer__brand-desc {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-light);
+}
+
+/* Column titles */
+.footer__col-title {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+/* Column links */
+.footer__col ul { display: flex; flex-direction: column; gap: 10px; }
+
+.footer__col a {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-light);
+  transition: color var(--transition);
+}
+
+.footer__col a:hover { color: var(--accent); }
+
+/* Social links with icons */
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-light);
+  transition: color var(--transition);
+}
+
+.footer__social-link:hover { color: var(--accent); }
+
+.footer__social-link svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--text-muted);
+  fill: none;
+  stroke-width: 1.5;
+  flex-shrink: 0;
+  transition: stroke var(--transition);
+}
+
+.footer__social-link:hover svg {
+  stroke: var(--accent);
+}
+
+/* Newsletter */
+.footer__newsletter-form {
+  position: relative;
+  display: flex;
+  margin-top: 4px;
+}
+
+.footer__newsletter-input {
+  flex: 1;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-right: none;
+  border-radius: 6px 0 0 6px;
+  outline: none;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text);
+  padding: 10px 14px;
+  transition: border-color var(--transition);
+}
+
+.footer__newsletter-input::placeholder {
+  color: var(--text-muted);
+}
+
+.footer__newsletter-input:focus {
+  border-color: var(--accent);
+}
+
+.footer__newsletter-btn {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 10px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--transition);
+}
+
+.footer__newsletter-btn:hover {
+  background: var(--accent-hover);
+}
+
+/* Bottom bar */
+.footer__bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.footer__copyright {
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+@media (max-width: 1024px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+/* ============================================
+   GALLERY
+   ============================================ */
+.gallery__subtitle {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-light);
+  text-align: center;
+  max-width: 480px;
+  margin: -24px auto 32px;
+}
+
+.gallery__filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+.gallery__filter-btn {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.gallery__filter-btn:hover {
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.gallery__filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+}
+
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.gallery__item {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.gallery__item.hidden {
+  opacity: 0;
+  transform: scale(0.85);
+  pointer-events: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.gallery__item-inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.gallery__item-inner:hover {
+  border-color: var(--accent);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.gallery__item-inner img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  transform: scale(1.03);
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gallery__item-inner:hover img {
+  transform: scale(1.08);
+}
+
+.gallery__item-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery__item-inner:hover .gallery__item-overlay {
+  opacity: 1;
+}
+
+.gallery__zoom-icon {
+  width: 32px;
+  height: 32px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 4px;
+}
+
+.gallery__item-title {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--white);
+  text-align: center;
+}
+
+.gallery__item-badge {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  padding: 4px 14px;
+}
+
+/* ============================================
+   AUTO SLIDER (Landing Page Gallery)
+   ============================================ */
+@keyframes slider-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.auto-slider {
+  width: 100%;
+  overflow: hidden;
+  margin: 40px 0 32px;
+  mask: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  -webkit-mask: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.auto-slider__track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: slider-scroll 120s linear infinite;
+}
+
+.auto-slider:hover .auto-slider__track {
+  animation-play-state: paused;
+}
+
+.auto-slider__item {
+  flex-shrink: 0;
+  width: 300px;
+  height: 300px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auto-slider__item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+}
+
+.auto-slider__item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.auto-slider__cta {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auto-slider__cta .btn-learn-more {
+  background: var(--accent);
+  color: var(--white);
+  border-color: var(--accent);
+}
+
+.auto-slider__cta .btn-learn-more:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+@media (max-width: 900px) {
+  .auto-slider__item {
+    width: 240px;
+    height: 240px;
+  }
+  .auto-slider__track {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .auto-slider__item {
+    width: 180px;
+    height: 180px;
+    border-radius: 12px;
+  }
+  .auto-slider__track {
+    gap: 12px;
+  }
+}
+
+/* ============================================
+   LIGHTBOX
+   ============================================ */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.lightbox__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  z-index: 10;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 36px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  line-height: 1;
+}
+
+.lightbox__close:hover { color: var(--white); }
+
+.lightbox__prev,
+.lightbox__next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.lightbox__prev { left: 24px; }
+.lightbox__next { right: 24px; }
+
+.lightbox__prev:hover,
+.lightbox__next:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+}
+
+.lightbox__prev svg,
+.lightbox__next svg {
+  width: 24px;
+  height: 24px;
+  color: var(--white);
+}
+
+.lightbox__content {
+  position: relative;
+  z-index: 5;
+  max-width: 80vw;
+  max-height: 85vh;
+  text-align: center;
+}
+
+.lightbox__img {
+  max-width: 100%;
+  max-height: 75vh;
+  border-radius: 4px;
+  object-fit: contain;
+  transition: opacity 0.25s ease;
+}
+
+.lightbox__info {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.lightbox__title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--white);
+}
+
+.lightbox__badge {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 4px 14px;
+}
+
+/* ============================================
+   TESTIMONIALS CAROUSEL
+   ============================================ */
+.testimonials-section {
+  padding-bottom: 0;
+}
+
+.testi-carousel {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.testi-carousel__track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.testi-card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 340px;
+  height: 340px;
+  padding: 36px;
+  border: 2px solid var(--border);
+  background: var(--white);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  clip-path: polygon(44px 0%, calc(100% - 44px) 0%, 100% 44px, 100% 100%, calc(100% - 44px) 100%, 44px 100%, 0 100%, 0 0);
+  display: flex;
+  flex-direction: column;
+}
+
+.testi-card--active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--white);
+  z-index: 10;
+  box-shadow: 0px 8px 0px 4px var(--border);
+}
+
+.testi-card--active .testi-card__quote {
+  color: var(--white);
+}
+
+.testi-card--active .testi-card__author {
+  color: rgba(255,255,255,0.8);
+}
+
+.testi-card--active .testi-card__corner {
+  background: var(--border);
+}
+
+.testi-card__corner {
+  position: absolute;
+  right: -2px;
+  top: 42px;
+  width: 71px; /* sqrt(50^2 + 50^2) approx */
+  height: 2px;
+  background: var(--border);
+  transform-origin: top right;
+  transform: rotate(45deg);
+}
+
+.testi-card__avatar {
+  display: none;
+}
+
+.testi-card__quote {
+  font-family: var(--serif);
+  font-size: clamp(16px, 1.4vw, 20px);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--text);
+  flex: 1;
+}
+
+.testi-card__author {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-muted);
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.testi-carousel__nav {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 20;
+}
+
+.testi-carousel__btn {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  border: 2px solid var(--border);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.testi-carousel__btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.testi-carousel__btn:hover svg {
+  color: var(--white);
+}
+
+.testi-carousel__btn svg {
+  width: 22px;
+  height: 22px;
+  color: var(--text);
+  transition: color 0.25s ease;
+}
+
+@media (max-width: 768px) {
+  .testi-card {
+    width: 270px;
+    height: 270px;
+    padding: 24px;
+  }
+  .testi-carousel {
+    height: 440px;
+  }
+}
+
+/* ============================================
+   REVEAL ANIMATIONS
+   ============================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0s; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.06s; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.12s; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.18s; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.24s; }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.3s; }
+.reveal-stagger.visible > *:nth-child(7) { transition-delay: 0.36s; }
+.reveal-stagger.visible > *:nth-child(8) { transition-delay: 0.42s; }
+
+.reveal-stagger.visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  :root {
+    --margin: 36px;
+    --section-gap: 64px;
+  }
+
+  .gallery__grid { grid-template-columns: repeat(2, 1fr); }
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .insta-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --margin: 20px;
+    --section-gap: 50px;
+  }
+
+  .navbar__links, .navbar__cta { display: none; }
+  .navbar__mobile-toggle { display: block; }
+
+  .musings {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .meet-neet-section {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .meet-neet-section__photo {
+    min-height: 400px;
+  }
+
+  .gallery__grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .insta-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .blog-card { flex: 0 0 240px; }
+  .video-card { flex: 0 0 240px; }
+}
+
+@media (max-width: 480px) {
+  .gallery__grid { grid-template-columns: 1fr; }
+  .insta-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero__categories { gap: 12px; }
+  .collabs-row { gap: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<nav class="navbar" id="navbar">
+  <div class="container navbar__inner">
+    <a href="#" class="navbar__logo"><img src="images/portfolio/logo-rev.png" alt="NEET Design Group"></a>
+    <ul class="navbar__links">
+      <li><a href="articles.html">Read</a></li>
+      <li><a href="#watch">Watch</a></li>
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#portfolio">Studio</a></li>
+      <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="navbar__cta">Contact Us</a>
+    <button class="navbar__mobile-toggle" aria-label="Menu">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero__image-wrap">
+    <img class="hero__image" src="images/portfolio/hero-main.jpg" alt="Beautiful interior design">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <div class="hero__label">NEET Design Group</div>
+      <h1 class="hero__title">Designed With <em>Intention.</em><br>Built Without Regret.</h1>
+      <p class="hero__subtitle">We design your home as a complete vision so every piece, finish, and decision works together from the start.</p>
+      <a href="contact.html" class="hero__cta">Start Your Project</a>
+    </div>
+  </div>
+  <div class="container">
+    <div class="hero__categories reveal-stagger" id="hero-cats">
+      <a class="hero__category" href="portfolio.html?filter=Living Room">
+        <img class="hero__category-img" src="images/portfolio/living-room-1.jpg" alt="Living Rooms">
+        <span class="hero__category-label">Living Rooms</span>
+      </a>
+      <a class="hero__category" href="portfolio.html?filter=Kitchen">
+        <img class="hero__category-img" src="images/portfolio/kitchen-1.jpg" alt="Kitchens">
+        <span class="hero__category-label">Kitchens</span>
+      </a>
+      <a class="hero__category" href="portfolio.html?filter=Bedroom">
+        <img class="hero__category-img" src="images/portfolio/bedroom-1.jpg" alt="Bedrooms">
+        <span class="hero__category-label">Bedrooms</span>
+      </a>
+      <a class="hero__category" href="portfolio.html?filter=Bathroom">
+        <img class="hero__category-img" src="images/portfolio/bathroom-1.jpg" alt="Bathrooms">
+        <span class="hero__category-label">Bathrooms</span>
+      </a>
+      <a class="hero__category" href="portfolio.html?filter=Outdoor">
+        <img class="hero__category-img" src="images/portfolio/outdoor-1.jpg" alt="Outdoor">
+        <span class="hero__category-label">Outdoor</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== READ / THE LATEST ===================== -->
+<section class="section" id="read">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-header__text">
+        <div class="section-label">Read</div>
+        <h2 class="section-title">The Latest</h2>
+      </div>
+      <a href="articles.html" class="btn-view-all">View All</a>
+    </div>
+    <div class="scroll-row reveal-stagger" id="read-row">
+      <a href="articles/heritage-in-bloom.html" class="blog-card">
+        <div class="blog-card__image-wrap"><img src="images/portfolio/bathroom-2.jpg" alt="Blog post"></div>
+        <div class="blog-card__meta">
+          <span class="blog-card__category">Design Studio</span>
+          <span class="blog-card__meta-dot"></span>
+          <span class="blog-card__date">Mar 15, 2026</span>
+        </div>
+        <h3 class="blog-card__title">The Spring Collection: Heritage in Bloom</h3>
+        <p class="blog-card__excerpt">After months of cozy, quiet winter, our spring collection invites a fresh reset with organic textures.</p>
+      </a>
+      <a href="articles/two-tone-kitchens.html" class="blog-card">
+        <div class="blog-card__image-wrap"><img src="images/portfolio/kitchen-2.jpg" alt="Blog post"></div>
+        <div class="blog-card__meta">
+          <span class="blog-card__category">Kitchens</span>
+          <span class="blog-card__meta-dot"></span>
+          <span class="blog-card__date">Mar 12, 2026</span>
+        </div>
+        <h3 class="blog-card__title">Two-Tone Kitchens: The Trend That Stays</h3>
+        <p class="blog-card__excerpt">Why mixing cabinet colors creates depth and personality in any kitchen — and how to get it right.</p>
+      </a>
+      <a href="articles/perfect-primary-suite.html" class="blog-card">
+        <div class="blog-card__image-wrap"><img src="images/portfolio/bedroom-2.jpg" alt="Blog post"></div>
+        <div class="blog-card__meta">
+          <span class="blog-card__category">Bedrooms</span>
+          <span class="blog-card__meta-dot"></span>
+          <span class="blog-card__date">Mar 8, 2026</span>
+        </div>
+        <h3 class="blog-card__title">Designing the Perfect Primary Suite</h3>
+        <p class="blog-card__excerpt">From lighting to layout, the details that transform a bedroom into a true personal retreat.</p>
+      </a>
+      <a href="articles/vessel-sinks-statement-mirrors.html" class="blog-card">
+        <div class="blog-card__image-wrap"><img src="images/portfolio/bathroom-3.jpg" alt="Blog post"></div>
+        <div class="blog-card__meta">
+          <span class="blog-card__category">Bathrooms</span>
+          <span class="blog-card__meta-dot"></span>
+          <span class="blog-card__date">Mar 5, 2026</span>
+        </div>
+        <h3 class="blog-card__title">Vessel Sinks & Statement Mirrors</h3>
+        <p class="blog-card__excerpt">How to elevate your bathroom with sculptural basins and mirrors that double as art pieces.</p>
+      </a>
+      <a href="articles/conversation-area.html" class="blog-card">
+        <div class="blog-card__image-wrap"><img src="images/portfolio/living-room-2.jpg" alt="Blog post"></div>
+        <div class="blog-card__meta">
+          <span class="blog-card__category">Living Rooms</span>
+          <span class="blog-card__meta-dot"></span>
+          <span class="blog-card__date">Feb 24, 2026</span>
+        </div>
+        <h3 class="blog-card__title">The Art of the Conversation Area</h3>
+        <p class="blog-card__excerpt">Creating living room layouts that encourage connection with statement seating and intentional flow.</p>
+      </a>
+      <a href="articles/desert-backyards.html" class="blog-card">
+        <div class="blog-card__image-wrap"><img src="images/portfolio/outdoor-1.jpg" alt="Blog post"></div>
+        <div class="blog-card__meta">
+          <span class="blog-card__category">Outdoor</span>
+          <span class="blog-card__meta-dot"></span>
+          <span class="blog-card__date">Feb 20, 2026</span>
+        </div>
+        <h3 class="blog-card__title">Desert Backyards That Actually Live</h3>
+        <p class="blog-card__excerpt">How to design an outdoor space that thrives in arid climates with turf, shade, and smart landscaping.</p>
+      </a>
+      <a href="articles/grand-entryways.html" class="blog-card">
+        <div class="blog-card__image-wrap"><img src="images/portfolio/entryway-1.jpg" alt="Blog post"></div>
+        <div class="blog-card__meta">
+          <span class="blog-card__category">Design</span>
+          <span class="blog-card__meta-dot"></span>
+          <span class="blog-card__date">Feb 16, 2026</span>
+        </div>
+        <h3 class="blog-card__title">Grand Entryways That Set the Tone</h3>
+        <p class="blog-card__excerpt">First impressions matter — how a well-designed foyer shapes the entire experience of a home.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== MEET NEET ===================== -->
+<section class="section" style="padding-top:0;">
+  <div class="container">
+    <div class="meet-neet-section reveal">
+      <div class="meet-neet-section__photo">
+        <img src="brand_assets/meet-neet.png" alt="NEET — Founder & Principal Designer">
+      </div>
+      <div class="meet-neet-section__content">
+        <div class="meet-neet__label">Founder & Principal Designer</div>
+        <h3 class="meet-neet__name">Meet NEET</h3>
+        <p class="meet-neet__text">NEET is known for creating interiors that feel effortless, cohesive, and fully considered from the start.</p>
+        <p class="meet-neet__text">More than a designer, she serves as the creative lead and decision filter guiding each project so nothing feels off, forced, or out of place.</p>
+        <p class="meet-neet__text">With a background that blends interior design and real estate insight, every decision is made with both how your home looks and how it performs in mind.</p>
+        <p class="meet-neet__text"><strong>Her approach is simple.</strong></p>
+        <p class="meet-neet__text"><strong>Get the plan right first.</strong></p>
+        <p class="meet-neet__text">Backed by a trusted team and established resources, each project is carried out with clarity and coordination.</p>
+        <ul class="meet-neet__credentials">
+          <li><strong>ASID-Award Winning Design</strong>Applied across kitchens, baths, and full interiors.</li>
+          <li><strong>CA Real Estate Licensed + IDI-Trained</strong>Every design decision protects and maximizes your home's resale value.</li>
+          <li><strong>Full-Service Renovation Support</strong>Concept, expert direction, selections, and contractor guidance.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== GALLERY PORTFOLIO ===================== -->
+<section class="section" style="padding-top:0;" id="portfolio">
+  <div class="container">
+    <div class="section-header reveal" style="justify-content:center;">
+      <div class="section-header__text" style="text-align:center;">
+        <div class="section-label">Gallery</div>
+        <h2 class="section-title">Our Work Speaks Before We Do</h2>
+      </div>
+    </div>
+    <p class="gallery__subtitle reveal">Explore our collection of stunning interiors and creative work</p>
+
+    <!-- Auto-Scrolling Image Slider -->
+    <div class="auto-slider">
+      <div class="auto-slider__track">
+        <div class="auto-slider__item"><img src="images/portfolio/kitchen-1.jpg" alt="White Shaker Kitchen" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kitchen-3.jpg" alt="Cherry Cabinet Kitchen" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kitchen-4.jpg" alt="Kitchen Dining Nook" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kitchen-5.jpg" alt="Galley Kitchen" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-10.jpg" alt="Bold Blue Granite Kitchen" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-11.jpg" alt="Kitchen Detail" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-12.jpg" alt="Kitchen Detail" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-20.jpg" alt="Blue Tile Wet Bar" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-21.jpg" alt="Wet Bar Wine Station" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-28.jpg" alt="Cherry Cabinet Kitchen" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-29.jpg" alt="Cherry Kitchen Wall Ovens" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-34.jpg" alt="White Kitchen Gold Hardware" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-35.jpg" alt="Marble Backsplash Kitchen" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-36.jpg" alt="Kitchen Galley View" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/living-room-1.jpg" alt="Open Concept Living Room" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/living-room-2.jpg" alt="High Ceiling Lounge" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/living-room-3.jpg" alt="Formal Dining Living" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/living-room-4.jpg" alt="Living Room" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bedroom-1.jpg" alt="Grasscloth Primary Suite" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bedroom-2.jpg" alt="Velvet Accent Bedroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bedroom-4.jpg" alt="Bedroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-10.jpg" alt="Rustic Stone Vestibule" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-11.jpg" alt="Palm Frond Powder Room" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-13.jpg" alt="Coastal Breeze Master Bath" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-14.jpg" alt="Geometric Glow Powder Room" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-15.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-16.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-17.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-18.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-19.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-20.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-21.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-22.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-36.jpg" alt="Cobalt Rainfall Shower" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-42.jpg" alt="Cobalt Rainfall Shower" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bathroom-1.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bathroom-2.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bathroom-3.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/outdoor-1.jpg" alt="Desert Cabana Retreat" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/outdoor-2.jpg" alt="Backyard Putting Green" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/outdoor-3.jpg" alt="Hot Tub Gazebo" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/commercial-2.jpg" alt="Executive Conference Room" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/commercial-3.jpg" alt="Private Office" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/commercial-4.jpg" alt="Office Break Room" loading="lazy"></div>
+        <!-- Duplicate set for seamless loop -->
+        <div class="auto-slider__item"><img src="images/portfolio/kitchen-1.jpg" alt="White Shaker Kitchen" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kitchen-3.jpg" alt="Cherry Cabinet Kitchen" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kitchen-4.jpg" alt="Kitchen Dining Nook" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kitchen-5.jpg" alt="Galley Kitchen" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-10.jpg" alt="Bold Blue Granite Kitchen" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-11.jpg" alt="Kitchen Detail" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-12.jpg" alt="Kitchen Detail" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-20.jpg" alt="Blue Tile Wet Bar" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-21.jpg" alt="Wet Bar Wine Station" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-28.jpg" alt="Cherry Cabinet Kitchen" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-29.jpg" alt="Cherry Kitchen Wall Ovens" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-34.jpg" alt="White Kitchen Gold Hardware" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-35.jpg" alt="Marble Backsplash Kitchen" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/kit-36.jpg" alt="Kitchen Galley View" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/living-room-1.jpg" alt="Open Concept Living Room" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/living-room-2.jpg" alt="High Ceiling Lounge" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/living-room-3.jpg" alt="Formal Dining Living" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/living-room-4.jpg" alt="Living Room" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bedroom-1.jpg" alt="Grasscloth Primary Suite" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bedroom-2.jpg" alt="Velvet Accent Bedroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bedroom-4.jpg" alt="Bedroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-10.jpg" alt="Rustic Stone Vestibule" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-11.jpg" alt="Palm Frond Powder Room" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-13.jpg" alt="Coastal Breeze Master Bath" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-14.jpg" alt="Geometric Glow Powder Room" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-15.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-16.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-17.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-18.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-19.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-20.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-21.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-22.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-36.jpg" alt="Cobalt Rainfall Shower" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bath-42.jpg" alt="Cobalt Rainfall Shower" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bathroom-1.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bathroom-2.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/bathroom-3.jpg" alt="Bathroom" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/outdoor-1.jpg" alt="Desert Cabana Retreat" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/outdoor-2.jpg" alt="Backyard Putting Green" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/outdoor-3.jpg" alt="Hot Tub Gazebo" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/commercial-2.jpg" alt="Executive Conference Room" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/commercial-3.jpg" alt="Private Office" loading="lazy"></div>
+        <div class="auto-slider__item"><img src="images/portfolio/commercial-4.jpg" alt="Office Break Room" loading="lazy"></div>
+      </div>
+    </div>
+
+    <div class="auto-slider__cta reveal">
+      <a href="portfolio.html" class="btn-learn-more">Check Our Projects</a>
+    </div>
+    <!-- END Auto Slider -->
+  </div>
+</section>
+
+
+<!-- ===================== TESTIMONIALS ===================== -->
+<section class="section testimonials-section" id="testimonials">
+  <div class="container">
+    <div class="section-header reveal" style="justify-content:center;">
+      <div class="section-header__text" style="text-align:center;">
+        <div class="section-label">Client Stories</div>
+        <h2 class="section-title">What It's Like to Work With NEET</h2>
+      </div>
+    </div>
+  </div>
+  <div class="testi-carousel" id="testiCarousel">
+    <div class="testi-carousel__track" id="testiTrack"></div>
+    <div class="testi-carousel__nav">
+      <button class="testi-carousel__btn" id="testiPrev" aria-label="Previous testimonial">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="testi-carousel__btn" id="testiNext" aria-label="Next testimonial">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 6 15 12 9 18"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== OUR APPROACH ===================== -->
+<section class="approach">
+  <div class="container">
+    <div class="approach__inner reveal">
+      <div class="approach__header">
+        <div class="approach__label">Our Process</div>
+        <h2 class="approach__title">How We Approach Each Project</h2>
+        <p class="approach__intro">A well-designed home begins long before anything is selected. It begins with clarity.</p>
+      </div>
+      <div>
+        <div class="approach__steps">
+          <div class="approach__step">
+            <p class="approach__step-text"><strong>Understand the space.</strong> We take the time to learn the room, its flow, and how you actually live in it.</p>
+          </div>
+          <div class="approach__step">
+            <p class="approach__step-text"><strong>See the whole picture.</strong> Before any selection is made, we map how everything will come together as one cohesive vision.</p>
+          </div>
+          <div class="approach__step">
+            <p class="approach__step-text"><strong>Decide with intention.</strong> Each material, finish, and detail is chosen so nothing feels out of place and everything works in harmony.</p>
+          </div>
+        </div>
+        <div class="approach__result reveal">
+          <p>The result is a home that feels effortless, considered, and complete.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DESIGN STUDIO CTA ===================== -->
+<section class="studio-cta">
+  <img class="studio-cta__bg" src="images/portfolio/cta-living-room.jpg" alt="">
+  <div class="studio-cta__overlay"></div>
+  <div class="studio-cta__content reveal">
+    <h2 class="studio-cta__title">Creating Spaces That Feel Like Home</h2>
+    <p class="studio-cta__desc">Our full-service interior design studio transforms houses into homes that reflect the way you live. From concept through completion, we bring warmth, intention, and beauty to every project.</p>
+    <a href="contact.html" class="btn-learn-more">Book Your Consultation</a>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer__grid">
+
+      <!-- Company Info -->
+      <div class="footer__brand">
+        <div class="footer__brand-top">
+          <img src="images/portfolio/logo-rev.png" alt="NEET Design Group">
+        </div>
+        <p class="footer__brand-desc">This is not decoration. This is decision-making. We guide every detail before anything is purchased so your home comes together exactly as it should.</p>
+      </div>
+
+      <!-- Useful Links -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">Useful Links</h4>
+        <ul>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="#portfolio">Gallery</a></li>
+          <li><a href="#testimonials">Client Stories</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Follow Us -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">Follow Us</h4>
+        <ul>
+          <li>
+            <a href="#" class="footer__social-link">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+              <span>Instagram</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="footer__social-link">
+              <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" fill="none"/></svg>
+              <span>Facebook</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="footer__social-link">
+              <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733-16z" fill="none"/><path d="M4 20l6.768-6.768" fill="none"/><path d="M20 4l-6.768 6.768" fill="none"/></svg>
+              <span>X (Twitter)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">Subscribe to Our Newsletter</h4>
+        <form class="footer__newsletter-form" onsubmit="return false;">
+          <input class="footer__newsletter-input" type="email" placeholder="Your email address" aria-label="Email for newsletter" required>
+          <button class="footer__newsletter-btn" type="submit">Subscribe</button>
+        </form>
+      </div>
+
+    </div>
+    <div class="footer__bottom">
+      <div class="footer__copyright">&copy; 2026 NEET Design Group. All rights reserved.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== SCRIPTS ===================== -->
+<script>
+// Navbar scroll shadow
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+// Intersection Observer for reveal animations
+const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -40px 0px' };
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
+  observer.observe(el);
+});
+
+
+// ── TESTIMONIALS CAROUSEL ───────────────────────
+(function() {
+  const testimonials = [
+    { quote: "Nenah with Neet Design Group has a great personality. Skillful, talented and a pleasure to work with! Enjoyed the project at Eyediology. Thank you!!", by: "Steve Litvak" },
+    { quote: "Neet Design are amazing. They truly captured the essence of my persona. Their design masterfully blends functionality with a serene, calming atmosphere, making it a true sanctuary. Every element amplifies the tranquil environment I was looking for.", by: "Angela Ahmet" },
+    { quote: "Working with Neet and Tawni has been great. My home is 5,200 sq ft, and they managed this large project efficiently — it was completed exactly as planned. Six bathrooms were completely renovated from the ground up.", by: "Ben M." },
+    { quote: "They were extremely professional and very helpful when answering my questions. I understand that I had quite a bit, but they were very patient and took their time to help me out.", by: "Ripen Rip" },
+    { quote: "We had a great experience with Nenah Washington and the Neet Design Group. Nenah sure knows how to transform her clients' space by listening to their wants and personal space wishes.", by: "Enrico Cairo" },
+    { quote: "I hate cooking, but after NEET's vision of my new kitchen I can't seem to stay out of it. This woman has a gift and I am thankful for the referral. I highly recommend this group.", by: "Michelle Shelby" },
+    { quote: "Neet Design Group is professional, creative, and reliable! I have always been able to count on them for excellent outcomes!", by: "CEO" },
+    { quote: "Nenah did a good job, no she did a great job, she took over the entire project, even the HOA, and did a wonderful job talking the project over.", by: "Ron Paperno" },
+    { quote: "Neet did an excellent job! I highly recommend her to all of my friends and family who need help with interior design or any type of project related to it!!", by: "Kendall Washington" },
+    { quote: "Nenah gave us excellent customer service from start to finish and submitted paperwork to our HOA to get the gazebo approval and installed.", by: "Don Metz" },
+    { quote: "Very professional. Creative, listens to my wants and vision. Created the perfect space! Would recommend Neet Design again.", by: "Kelley Aratin" },
+    { quote: "The work she does speaks for itself. Highly professional and just an awesome talent.", by: "Matthew Henry" },
+  ];
+
+  const track = document.getElementById('testiTrack');
+  let cards = [...testimonials];
+  let cardSize = window.innerWidth >= 640 ? 340 : 270;
+
+  function render() {
+    track.innerHTML = '';
+    const half = Math.floor(cards.length / 2);
+    cards.forEach((t, i) => {
+      const pos = i - half;
+      const isCenter = pos === 0;
+      const card = document.createElement('div');
+      card.className = 'testi-card' + (isCenter ? ' testi-card--active' : '');
+
+      const offsetX = (cardSize / 1.5) * pos;
+      const offsetY = isCenter ? -55 : (pos % 2 ? 12 : -12);
+      const rotate = isCenter ? 0 : (pos % 2 ? 2.5 : -2.5);
+
+      card.style.transform = `translate(-50%, -50%) translateX(${offsetX}px) translateY(${offsetY}px) rotate(${rotate}deg)`;
+      card.style.zIndex = isCenter ? 10 : (5 - Math.abs(pos));
+
+      card.innerHTML = `
+        <span class="testi-card__corner"></span>
+        <img class="testi-card__avatar" src="${t.img}" alt="${t.by.split(',')[0]}">
+        <p class="testi-card__quote">"${t.quote}"</p>
+        <p class="testi-card__author">— ${t.by}</p>
+      `;
+
+      card.addEventListener('click', () => move(pos));
+      track.appendChild(card);
+    });
+  }
+
+  function move(steps) {
+    if (steps === 0) return;
+    if (steps > 0) {
+      for (let i = 0; i < steps; i++) cards.push(cards.shift());
+    } else {
+      for (let i = 0; i < Math.abs(steps); i++) cards.unshift(cards.pop());
+    }
+    render();
+  }
+
+  document.getElementById('testiPrev').addEventListener('click', () => move(-1));
+  document.getElementById('testiNext').addEventListener('click', () => move(1));
+
+  window.addEventListener('resize', () => {
+    cardSize = window.innerWidth >= 640 ? 340 : 270;
+    render();
+  });
+
+  render();
+})();
+</script>
+
+</body>
+</html>
