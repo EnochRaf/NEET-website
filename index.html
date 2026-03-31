@@ -350,44 +350,6 @@ ul { list-style: none; }
   color: var(--white);
 }
 
-.hero__categories {
-  display: flex;
-  justify-content: center;
-  gap: clamp(16px, 3vw, 40px);
-  padding: 30px 20px;
-  flex-wrap: wrap;
-}
-
-.hero__category {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  transition: transform var(--transition);
-}
-
-.hero__category:hover { transform: translateY(-3px); }
-.hero__category:hover .hero__category-label { color: var(--accent); }
-
-.hero__category-img {
-  width: clamp(120px, 13vw, 180px);
-  height: clamp(120px, 13vw, 180px);
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid var(--white);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-}
-
-.hero__category-label {
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  color: var(--text);
-  text-align: center;
-  transition: color var(--transition);
-}
 
 /* ============================================
    BLOG CARDS
@@ -1074,11 +1036,9 @@ ul { list-style: none; }
   display: flex;
   flex-direction: column;
   gap: 0;
-  counter-reset: approach-step;
 }
 
 .approach__step {
-  counter-increment: approach-step;
   position: relative;
   padding: 24px 24px 24px 80px;
   border-bottom: 1px solid rgba(0,0,0,0.05);
@@ -1096,7 +1056,7 @@ ul { list-style: none; }
 }
 
 .approach__step::before {
-  content: counter(approach-step, decimal-leading-zero);
+  content: attr(data-letter);
   position: absolute;
   left: 16px;
   top: 18px;
@@ -1119,22 +1079,6 @@ ul { list-style: none; }
   font-weight: 500;
 }
 
-.approach__result {
-  margin-top: 32px;
-  padding: 28px 32px;
-  background: var(--bg);
-  border-radius: 6px;
-  border-left: 3px solid var(--accent);
-}
-
-.approach__result p {
-  font-family: var(--serif);
-  font-size: clamp(18px, 1.6vw, 22px);
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1.5;
-  color: var(--text);
-}
 
 @media (max-width: 768px) {
   .approach__inner {
@@ -1309,21 +1253,22 @@ ul { list-style: none; }
    ============================================ */
 .footer {
   background: var(--bg-dark);
-  padding: 48px 0 24px;
+  padding: 60px 0 28px;
 }
 
 .footer__grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1.5fr;
-  gap: 40px;
-  margin-bottom: 32px;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 40px;
+  align-items: start;
 }
 
-/* Column 1: Company info */
+/* Column 1: Brand */
 .footer__brand {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .footer__brand-top {
@@ -1339,35 +1284,45 @@ ul { list-style: none; }
 
 .footer__brand-name {
   font-family: var(--sans);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text);
-  letter-spacing: 0.02em;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 4px;
 }
 
 .footer__brand-desc {
   font-size: 13px;
   font-weight: 300;
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--text-light);
+  max-width: 320px;
 }
 
 /* Column titles */
 .footer__col-title {
   font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--accent);
-  margin-bottom: 16px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 20px;
 }
 
 /* Column links */
-.footer__col ul { display: flex; flex-direction: column; gap: 10px; }
+.footer__col ul { display: flex; flex-direction: column; gap: 12px; }
+
+.footer__col li {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-light);
+}
 
 .footer__col a {
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 300;
   color: var(--text-light);
   transition: color var(--transition);
 }
@@ -1380,7 +1335,7 @@ ul { list-style: none; }
   align-items: center;
   gap: 10px;
   font-size: 13px;
-  font-weight: 400;
+  font-weight: 300;
   color: var(--text-light);
   transition: color var(--transition);
 }
@@ -1399,55 +1354,6 @@ ul { list-style: none; }
 
 .footer__social-link:hover svg {
   stroke: var(--accent);
-}
-
-/* Newsletter */
-.footer__newsletter-form {
-  position: relative;
-  display: flex;
-  margin-top: 4px;
-}
-
-.footer__newsletter-input {
-  flex: 1;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-right: none;
-  border-radius: 6px 0 0 6px;
-  outline: none;
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--text);
-  padding: 10px 14px;
-  transition: border-color var(--transition);
-}
-
-.footer__newsletter-input::placeholder {
-  color: var(--text-muted);
-}
-
-.footer__newsletter-input:focus {
-  border-color: var(--accent);
-}
-
-.footer__newsletter-btn {
-  background: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: 0 6px 6px 0;
-  color: var(--white);
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  padding: 10px 20px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background var(--transition);
-}
-
-.footer__newsletter-btn:hover {
-  background: var(--accent-hover);
 }
 
 /* Bottom bar */
@@ -1469,14 +1375,14 @@ ul { list-style: none; }
 @media (max-width: 1024px) {
   .footer__grid {
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: 36px;
   }
 }
 
 @media (max-width: 768px) {
   .footer__grid {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 32px;
   }
 }
 
@@ -1831,140 +1737,125 @@ ul { list-style: none; }
    TESTIMONIALS CAROUSEL
    ============================================ */
 .testimonials-section {
-  padding-bottom: 0;
+  padding: 0;
+  background: var(--bg);
 }
 
-.testi-carousel {
+.testi-scroll {
   position: relative;
-  width: 100%;
-  height: 520px;
+  height: 300vh;
+  perspective: 1000px;
+}
+
+.testi-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  background: var(--bg-card);
 }
 
-.testi-carousel__track {
+.testi-stack {
   position: relative;
-  width: 100%;
-  height: 100%;
+  width: 360px;
+  height: 460px;
+  perspective: 1000px;
 }
 
 .testi-card {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 340px;
-  height: 340px;
-  padding: 36px;
-  border: 2px solid var(--border);
-  background: var(--white);
-  color: var(--text);
-  cursor: pointer;
-  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  clip-path: polygon(44px 0%, calc(100% - 44px) 0%, 100% 44px, 100% 100%, calc(100% - 44px) 100%, 44px 100%, 0 100%, 0 0);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 40px 32px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  will-change: transform, filter;
+  backface-visibility: hidden;
 }
 
-.testi-card--active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--white);
-  z-index: 10;
-  box-shadow: 0px 8px 0px 4px var(--border);
+.testi-card__stars {
+  display: flex;
+  gap: 3px;
+  color: var(--accent);
 }
 
-.testi-card--active .testi-card__quote {
-  color: var(--white);
-}
-
-.testi-card--active .testi-card__author {
-  color: rgba(255,255,255,0.8);
-}
-
-.testi-card--active .testi-card__corner {
-  background: var(--border);
-}
-
-.testi-card__corner {
-  position: absolute;
-  right: -2px;
-  top: 42px;
-  width: 71px; /* sqrt(50^2 + 50^2) approx */
-  height: 2px;
-  background: var(--border);
-  transform-origin: top right;
-  transform: rotate(45deg);
-}
-
-.testi-card__avatar {
-  display: none;
+.testi-card__stars svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
 }
 
 .testi-card__quote {
   font-family: var(--serif);
-  font-size: clamp(16px, 1.4vw, 20px);
+  font-size: clamp(17px, 1.5vw, 20px);
   font-weight: 400;
-  line-height: 1.45;
-  color: var(--text);
-  flex: 1;
-}
-
-.testi-card__author {
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 300;
   font-style: italic;
-  color: var(--text-muted);
-  margin-top: auto;
-  padding-top: 12px;
+  line-height: 1.6;
+  color: var(--text);
+  text-align: center;
 }
 
-.testi-carousel__nav {
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
+.testi-card__author-row {
   display: flex;
-  gap: 8px;
-  z-index: 20;
+  align-items: center;
+  gap: 14px;
 }
 
-.testi-carousel__btn {
-  width: 52px;
-  height: 52px;
+.testi-card__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--border);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--white);
-  border: 2px solid var(--border);
-  cursor: pointer;
-  transition: all 0.25s ease;
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(0,0,0,0.06);
 }
 
-.testi-carousel__btn:hover {
-  background: var(--accent);
-  border-color: var(--accent);
+.testi-card__author-info {
+  text-align: left;
 }
 
-.testi-carousel__btn:hover svg {
-  color: var(--white);
-}
-
-.testi-carousel__btn svg {
-  width: 22px;
-  height: 22px;
+.testi-card__name {
+  font-family: var(--sans);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   color: var(--text);
-  transition: color 0.25s ease;
+  line-height: 1.3;
+}
+
+.testi-card__role {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-muted);
 }
 
 @media (max-width: 768px) {
-  .testi-card {
-    width: 270px;
-    height: 270px;
-    padding: 24px;
+  .testi-stack {
+    width: 300px;
+    height: 420px;
   }
-  .testi-carousel {
-    height: 440px;
+  .testi-card {
+    padding: 32px 24px;
   }
 }
 
@@ -2073,11 +1964,10 @@ ul { list-style: none; }
   <div class="container navbar__inner">
     <a href="#" class="navbar__logo"><img src="images/portfolio/logo-rev.png" alt="NEET Design Group"></a>
     <ul class="navbar__links">
-      <li><a href="articles.html">Read</a></li>
-      <li><a href="#watch">Watch</a></li>
-      <li><a href="#shop">Shop</a></li>
-      <li><a href="#portfolio">Studio</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
+      <li><a href="#portfolio">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#process">Process</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <a href="contact.html" class="navbar__cta">Contact Us</a>
@@ -2093,34 +1983,10 @@ ul { list-style: none; }
     <img class="hero__image" src="images/portfolio/hero-main.jpg" alt="Beautiful interior design">
     <div class="hero__overlay"></div>
     <div class="hero__content">
-      <div class="hero__label">NEET Design Group</div>
+      <div class="hero__label">For Those Who Expect More Than Beautiful.</div>
       <h1 class="hero__title">Designed With <em>Intention.</em><br>Built Without Regret.</h1>
-      <p class="hero__subtitle">We design your home as a complete vision so every piece, finish, and decision works together from the start.</p>
+      <p class="hero__subtitle">More than design, this is structured decision-making guiding every detail so nothing feels off, forced, or out of place.</p>
       <a href="contact.html" class="hero__cta">Start Your Project</a>
-    </div>
-  </div>
-  <div class="container">
-    <div class="hero__categories reveal-stagger" id="hero-cats">
-      <a class="hero__category" href="portfolio.html?filter=Living Room">
-        <img class="hero__category-img" src="images/portfolio/living-room-1.jpg" alt="Living Rooms">
-        <span class="hero__category-label">Living Rooms</span>
-      </a>
-      <a class="hero__category" href="portfolio.html?filter=Kitchen">
-        <img class="hero__category-img" src="images/portfolio/kitchen-1.jpg" alt="Kitchens">
-        <span class="hero__category-label">Kitchens</span>
-      </a>
-      <a class="hero__category" href="portfolio.html?filter=Bedroom">
-        <img class="hero__category-img" src="images/portfolio/bedroom-1.jpg" alt="Bedrooms">
-        <span class="hero__category-label">Bedrooms</span>
-      </a>
-      <a class="hero__category" href="portfolio.html?filter=Bathroom">
-        <img class="hero__category-img" src="images/portfolio/bathroom-1.jpg" alt="Bathrooms">
-        <span class="hero__category-label">Bathrooms</span>
-      </a>
-      <a class="hero__category" href="portfolio.html?filter=Outdoor">
-        <img class="hero__category-img" src="images/portfolio/outdoor-1.jpg" alt="Outdoor">
-        <span class="hero__category-label">Outdoor</span>
-      </a>
     </div>
   </div>
 </section>
@@ -2211,7 +2077,7 @@ ul { list-style: none; }
 </section>
 
 <!-- ===================== MEET NEET ===================== -->
-<section class="section" style="padding-top:0;">
+<section class="section" id="about" style="padding-top:0;">
   <div class="container">
     <div class="meet-neet-section reveal">
       <div class="meet-neet-section__photo">
@@ -2351,52 +2217,42 @@ ul { list-style: none; }
 
 
 <!-- ===================== TESTIMONIALS ===================== -->
-<section class="section testimonials-section" id="testimonials">
-  <div class="container">
-    <div class="section-header reveal" style="justify-content:center;">
-      <div class="section-header__text" style="text-align:center;">
+<section class="testimonials-section" id="testimonials">
+  <div class="testi-scroll" id="testiScroll">
+    <div class="testi-sticky">
+      <div style="text-align:center; margin-bottom: 40px; display:flex; flex-direction:column; align-items:center;">
         <div class="section-label">Client Stories</div>
         <h2 class="section-title">What It's Like to Work With NEET</h2>
       </div>
-    </div>
-  </div>
-  <div class="testi-carousel" id="testiCarousel">
-    <div class="testi-carousel__track" id="testiTrack"></div>
-    <div class="testi-carousel__nav">
-      <button class="testi-carousel__btn" id="testiPrev" aria-label="Previous testimonial">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <button class="testi-carousel__btn" id="testiNext" aria-label="Next testimonial">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="9 6 15 12 9 18"/></svg>
-      </button>
+      <div class="testi-stack" id="testiStack"></div>
     </div>
   </div>
 </section>
 
 
 <!-- ===================== OUR APPROACH ===================== -->
-<section class="approach">
+<section class="approach" id="process">
   <div class="container">
     <div class="approach__inner reveal">
       <div class="approach__header">
         <div class="approach__label">Our Process</div>
-        <h2 class="approach__title">How We Approach Each Project</h2>
-        <p class="approach__intro">A well-designed home begins long before anything is selected. It begins with clarity.</p>
+        <h2 class="approach__title">The NEET Method</h2>
+        <p class="approach__intro">A well-designed home begins long before anything is selected. It begins with clarity, intention, and a deep understanding of how you truly live.</p>
       </div>
       <div>
         <div class="approach__steps">
-          <div class="approach__step">
-            <p class="approach__step-text"><strong>Understand the space.</strong> We take the time to learn the room, its flow, and how you actually live in it.</p>
+          <div class="approach__step" data-letter="N">
+            <p class="approach__step-text"><strong>Nurture the Foundation</strong><br>We immerse ourselves in your space—its architecture, flow, and the way you actually live in it—so every future decision is grounded in reality and feels completely personal.</p>
           </div>
-          <div class="approach__step">
-            <p class="approach__step-text"><strong>See the whole picture.</strong> Before any selection is made, we map how everything will come together as one cohesive vision.</p>
+          <div class="approach__step" data-letter="E">
+            <p class="approach__step-text"><strong>Envision the Complete Picture</strong><br>Before a single item is chosen, we map the entire vision so every element works together as one seamless, cohesive whole.</p>
           </div>
-          <div class="approach__step">
-            <p class="approach__step-text"><strong>Decide with intention.</strong> Each material, finish, and detail is chosen so nothing feels out of place and everything works in harmony.</p>
+          <div class="approach__step" data-letter="E">
+            <p class="approach__step-text"><strong>Execute with Intention</strong><br>Each material, finish, fixture, and detail is selected with purpose—so nothing feels out of place and everything exists in perfect harmony.</p>
           </div>
-        </div>
-        <div class="approach__result reveal">
-          <p>The result is a home that feels effortless, considered, and complete.</p>
+          <div class="approach__step" data-letter="T">
+            <p class="approach__step-text"><strong>Transform into Timeless Harmony</strong><br>The result is a home that feels effortless, deeply considered, and completely you—refined, functional, and whole.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -2419,58 +2275,65 @@ ul { list-style: none; }
   <div class="container">
     <div class="footer__grid">
 
-      <!-- Company Info -->
+      <!-- Brand -->
       <div class="footer__brand">
         <div class="footer__brand-top">
           <img src="images/portfolio/logo-rev.png" alt="NEET Design Group">
         </div>
+        <div class="footer__brand-name">NEET Design Group</div>
         <p class="footer__brand-desc">This is not decoration. This is decision-making. We guide every detail before anything is purchased so your home comes together exactly as it should.</p>
       </div>
 
-      <!-- Useful Links -->
+      <!-- Explore -->
       <div class="footer__col">
-        <h4 class="footer__col-title">Useful Links</h4>
+        <h4 class="footer__col-title">Explore</h4>
         <ul>
+          <li><a href="contact.html">Start Your Project</a></li>
           <li><a href="portfolio.html">Portfolio</a></li>
-          <li><a href="#portfolio">Gallery</a></li>
-          <li><a href="#testimonials">Client Stories</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="#portfolio">Services</a></li>
+          <li><a href="#about">About Us</a></li>
         </ul>
       </div>
 
-      <!-- Follow Us -->
+      <!-- Contact -->
       <div class="footer__col">
-        <h4 class="footer__col-title">Follow Us</h4>
+        <h4 class="footer__col-title">Contact</h4>
+        <ul>
+          <li><a href="tel:+18582609997">(858) 260-9997</a></li>
+          <li><a href="mailto:info@neetdesigngroup.com">info@neetdesigngroup.com</a></li>
+          <li>Orange County, CA</li>
+        </ul>
+      </div>
+
+      <!-- Connect -->
+      <div class="footer__col">
+        <h4 class="footer__col-title">Connect</h4>
         <ul>
           <li>
-            <a href="#" class="footer__social-link">
+            <a href="https://www.instagram.com/neetdesigngroup/" target="_blank" rel="noopener noreferrer" class="footer__social-link">
               <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
               <span>Instagram</span>
             </a>
           </li>
           <li>
-            <a href="#" class="footer__social-link">
+            <a href="https://www.facebook.com/Neetdesigngroup/" target="_blank" rel="noopener noreferrer" class="footer__social-link">
               <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" fill="none"/></svg>
               <span>Facebook</span>
             </a>
           </li>
           <li>
-            <a href="#" class="footer__social-link">
-              <svg viewBox="0 0 24 24"><path d="M4 4l11.733 16h4.267l-11.733-16z" fill="none"/><path d="M4 20l6.768-6.768" fill="none"/><path d="M20 4l-6.768 6.768" fill="none"/></svg>
-              <span>X (Twitter)</span>
+            <a href="https://www.linkedin.com/in/neet-design-group-17a0b0242/?skipRedirect=true" target="_blank" rel="noopener noreferrer" class="footer__social-link">
+              <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" fill="none"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              <span>LinkedIn</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.tiktok.com/@neetdesigngroup" target="_blank" rel="noopener noreferrer" class="footer__social-link">
+              <svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 108 0 4 4 0 00-8 0z" fill="none"/><path d="M16 8v8a5 5 0 005-5V3h-3a5 5 0 00-5 5" fill="none"/><path d="M8 16v-8a5 5 0 00-5 5v8h3a5 5 0 005-5" fill="none"/></svg>
+              <span>TikTok</span>
             </a>
           </li>
         </ul>
-      </div>
-
-      <!-- Newsletter -->
-      <div class="footer__col">
-        <h4 class="footer__col-title">Subscribe to Our Newsletter</h4>
-        <form class="footer__newsletter-form" onsubmit="return false;">
-          <input class="footer__newsletter-input" type="email" placeholder="Your email address" aria-label="Email for newsletter" required>
-          <button class="footer__newsletter-btn" type="submit">Subscribe</button>
-        </form>
       </div>
 
     </div>
@@ -2505,74 +2368,78 @@ document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
 });
 
 
-// ── TESTIMONIALS CAROUSEL ───────────────────────
+// ── TESTIMONIALS — SCROLL-DRIVEN STACKED CARDS ───────────────────────
 (function() {
   const testimonials = [
-    { quote: "Nenah with Neet Design Group has a great personality. Skillful, talented and a pleasure to work with! Enjoyed the project at Eyediology. Thank you!!", by: "Steve Litvak" },
-    { quote: "Neet Design are amazing. They truly captured the essence of my persona. Their design masterfully blends functionality with a serene, calming atmosphere, making it a true sanctuary. Every element amplifies the tranquil environment I was looking for.", by: "Angela Ahmet" },
-    { quote: "Working with Neet and Tawni has been great. My home is 5,200 sq ft, and they managed this large project efficiently — it was completed exactly as planned. Six bathrooms were completely renovated from the ground up.", by: "Ben M." },
-    { quote: "They were extremely professional and very helpful when answering my questions. I understand that I had quite a bit, but they were very patient and took their time to help me out.", by: "Ripen Rip" },
-    { quote: "We had a great experience with Nenah Washington and the Neet Design Group. Nenah sure knows how to transform her clients' space by listening to their wants and personal space wishes.", by: "Enrico Cairo" },
-    { quote: "I hate cooking, but after NEET's vision of my new kitchen I can't seem to stay out of it. This woman has a gift and I am thankful for the referral. I highly recommend this group.", by: "Michelle Shelby" },
-    { quote: "Neet Design Group is professional, creative, and reliable! I have always been able to count on them for excellent outcomes!", by: "CEO" },
-    { quote: "Nenah did a good job, no she did a great job, she took over the entire project, even the HOA, and did a wonderful job talking the project over.", by: "Ron Paperno" },
-    { quote: "Neet did an excellent job! I highly recommend her to all of my friends and family who need help with interior design or any type of project related to it!!", by: "Kendall Washington" },
-    { quote: "Nenah gave us excellent customer service from start to finish and submitted paperwork to our HOA to get the gazebo approval and installed.", by: "Don Metz" },
-    { quote: "Very professional. Creative, listens to my wants and vision. Created the perfect space! Would recommend Neet Design again.", by: "Kelley Aratin" },
-    { quote: "The work she does speaks for itself. Highly professional and just an awesome talent.", by: "Matthew Henry" },
+    { quote: "Neet Design are amazing. They truly captured the essence of my persona. Their design masterfully blends functionality with a serene, calming atmosphere, making it a true sanctuary.", by: "Angela Ahmet", role: "Residential Client", rating: 5 },
+    { quote: "Working with Neet and Tawni has been great. My home is 5,200 sq ft, and they managed this large project efficiently — it was completed exactly as planned. Six bathrooms were completely renovated from the ground up.", by: "Ben M.", role: "Whole-Home Renovation", rating: 5 },
+    { quote: "I hate cooking, but after NEET's vision of my new kitchen I can't seem to stay out of it. This woman has a gift and I am thankful for the referral.", by: "Michelle Shelby", role: "Kitchen Remodel", rating: 5 },
+    { quote: "Nenah sure knows how to transform her clients' space by listening to their wants and personal space wishes. We had a great experience with the Neet Design Group.", by: "Enrico Cairo", role: "Design Consultation", rating: 5 },
   ];
 
-  const track = document.getElementById('testiTrack');
-  let cards = [...testimonials];
-  let cardSize = window.innerWidth >= 640 ? 340 : 270;
+  const starSVG = '<svg viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.37 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.37-2.448a1 1 0 00-1.175 0l-3.37 2.448c-.784.57-1.838-.197-1.54-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.286-3.957z"/></svg>';
 
-  function render() {
-    track.innerHTML = '';
-    const half = Math.floor(cards.length / 2);
-    cards.forEach((t, i) => {
-      const pos = i - half;
-      const isCenter = pos === 0;
-      const card = document.createElement('div');
-      card.className = 'testi-card' + (isCenter ? ' testi-card--active' : '');
+  const stack = document.getElementById('testiStack');
+  const scrollContainer = document.getElementById('testiScroll');
+  const len = testimonials.length;
 
-      const offsetX = (cardSize / 1.5) * pos;
-      const offsetY = isCenter ? -55 : (pos % 2 ? 12 : -12);
-      const rotate = isCenter ? 0 : (pos % 2 ? 2.5 : -2.5);
+  testimonials.forEach((t, i) => {
+    const initials = t.by.split(' ').map(n => n[0]).join('');
+    const card = document.createElement('div');
+    card.className = 'testi-card';
+    card.dataset.index = i;
+    card.style.zIndex = (len - i) * 10;
+    card.style.top = i * 10 + 'px';
 
-      card.style.transform = `translate(-50%, -50%) translateX(${offsetX}px) translateY(${offsetY}px) rotate(${rotate}deg)`;
-      card.style.zIndex = isCenter ? 10 : (5 - Math.abs(pos));
+    card.innerHTML = `
+      <div class="testi-card__stars">${starSVG.repeat(t.rating)}</div>
+      <p class="testi-card__quote">"${t.quote}"</p>
+      <div class="testi-card__author-row">
+        <div class="testi-card__avatar">${initials}</div>
+        <div class="testi-card__author-info">
+          <div class="testi-card__name">${t.by}</div>
+          <div class="testi-card__role">${t.role}</div>
+        </div>
+      </div>
+    `;
+    stack.appendChild(card);
+  });
 
-      card.innerHTML = `
-        <span class="testi-card__corner"></span>
-        <img class="testi-card__avatar" src="${t.img}" alt="${t.by.split(',')[0]}">
-        <p class="testi-card__quote">"${t.quote}"</p>
-        <p class="testi-card__author">— ${t.by}</p>
-      `;
+  const cards = stack.querySelectorAll('.testi-card');
 
-      card.addEventListener('click', () => move(pos));
-      track.appendChild(card);
+  function onScroll() {
+    const rect = scrollContainer.getBoundingClientRect();
+    const scrollHeight = scrollContainer.offsetHeight - window.innerHeight;
+    const rawProgress = Math.max(0, Math.min(1, -rect.top / scrollHeight));
+
+    cards.forEach((card, i) => {
+      const start = i / len;
+      const end = (i + 1) / len;
+
+      // Card progress: 0 = resting in stack, 1 = fully peeled away
+      const progress = Math.max(0, Math.min(1, (rawProgress - start) / (end - start)));
+
+      // Cards start flat (0 rotation), tilt slightly as they peel off
+      const rotation = progress * -6;
+      // Translate upward and away
+      const yPercent = progress * -160;
+      // Fade out as it leaves
+      const opacity = 1 - progress * 0.8;
+      // Scale down slightly as it peels
+      const scale = 1 - progress * 0.05;
+
+      // Subtle shadow
+      const blur = 4 + 16 * (1 - progress);
+      const alpha = 0.08 + 0.06 * (1 - progress);
+
+      card.style.transform = `translateY(${yPercent}%) rotate(${rotation}deg) scale(${scale})`;
+      card.style.opacity = opacity;
+      card.style.filter = `drop-shadow(0px 4px ${blur}px rgba(0,0,0,${alpha}))`;
     });
   }
 
-  function move(steps) {
-    if (steps === 0) return;
-    if (steps > 0) {
-      for (let i = 0; i < steps; i++) cards.push(cards.shift());
-    } else {
-      for (let i = 0; i < Math.abs(steps); i++) cards.unshift(cards.pop());
-    }
-    render();
-  }
-
-  document.getElementById('testiPrev').addEventListener('click', () => move(-1));
-  document.getElementById('testiNext').addEventListener('click', () => move(1));
-
-  window.addEventListener('resize', () => {
-    cardSize = window.innerWidth >= 640 ? 340 : 270;
-    render();
-  });
-
-  render();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 })();
 </script>
 
