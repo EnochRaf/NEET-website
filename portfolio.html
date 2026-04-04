@@ -2307,5 +2307,90 @@ document.addEventListener('keydown', (e) => {
 
 </script>
 
+<!-- Sanity CMS -->
+<script src="lib/sanity.js"></script>
+<script>
+(function() {
+  var cms = window.sanityCMS;
+  if (!cms) return;
+
+  var zoomSVG = '<svg class="gallery__zoom-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/><line x1="8" y1="11" x2="14" y2="11"/><line x1="11" y1="8" x2="11" y2="14"/></svg>';
+
+  cms.query('*[_type == "portfolioItem"] | order(category asc, order asc){ title, image, category }').then(function(items) {
+    if (!items || items.length === 0) return;
+    var grid = document.getElementById('galleryGrid');
+    if (!grid) return;
+
+    // Build new gallery HTML
+    grid.innerHTML = items.map(function(item) {
+      return '<div class="gallery__item" data-category="' + item.category + '" role="listitem">'
+        + '<div class="gallery__item-inner">'
+        + '<img src="' + cms.imageUrl(item.image) + '" alt="' + item.title + '">'
+        + '<div class="gallery__item-overlay">'
+        + zoomSVG
+        + '<h3 class="gallery__item-title">' + item.title + '</h3>'
+        + '<span class="gallery__item-badge">' + item.category + '</span>'
+        + '</div></div></div>';
+    }).join('');
+
+    // Rebuild filter buttons from actual categories
+    var categories = [];
+    items.forEach(function(item) {
+      if (categories.indexOf(item.category) === -1) categories.push(item.category);
+    });
+    var filterWrap = document.querySelector('.gallery__filters');
+    if (filterWrap) {
+      filterWrap.innerHTML = categories.map(function(cat, i) {
+        return '<button class="gallery__filter-btn' + (i === 0 ? ' active' : '') + '" data-filter="' + cat + '">' + cat + '</button>';
+      }).join('') + '<button class="gallery__filter-btn" data-filter="All">All</button>';
+    }
+
+    // Re-bind filter clicks
+    var newFilterBtns = document.querySelectorAll('.gallery__filter-btn');
+    var newGalleryItems = document.querySelectorAll('.gallery__item');
+
+    function applyFilter(filter) {
+      newGalleryItems.forEach(function(item) {
+        if (filter === 'All' || item.dataset.category === filter) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+
+    newFilterBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        newFilterBtns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        applyFilter(btn.dataset.filter);
+      });
+    });
+
+    // Re-bind lightbox clicks
+    document.querySelectorAll('.gallery__item-inner').forEach(function(inner) {
+      inner.addEventListener('click', function() {
+        var item = inner.closest('.gallery__item');
+        var visibleItems = Array.from(document.querySelectorAll('.gallery__item:not(.hidden)'));
+        var index = visibleItems.indexOf(item);
+        openLightbox(index);
+      });
+    });
+
+    // Apply initial filter
+    var urlFilter = new URLSearchParams(window.location.search).get('filter');
+    if (urlFilter) {
+      newFilterBtns.forEach(function(b) { b.classList.remove('active'); });
+      var matchBtn = Array.from(newFilterBtns).find(function(b) { return b.dataset.filter === urlFilter; });
+      if (matchBtn) matchBtn.classList.add('active');
+      applyFilter(urlFilter);
+    } else {
+      var activeBtn = document.querySelector('.gallery__filter-btn.active');
+      if (activeBtn) applyFilter(activeBtn.dataset.filter);
+    }
+  });
+})();
+</script>
+
 </body>
 </html>

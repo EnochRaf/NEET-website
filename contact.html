@@ -485,5 +485,50 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
 });
 </script>
 
+<!-- Sanity CMS -->
+<script src="lib/sanity.js"></script>
+<script>
+(function() {
+  var cms = window.sanityCMS;
+  if (!cms) return;
+
+  cms.query('*[_type == "contactPage"][0]').then(function(page) {
+    if (!page) return;
+    var label = document.querySelector('.page-hero__label');
+    var title = document.querySelector('.page-hero__title');
+    var desc = document.querySelector('.page-hero__desc');
+    var formTitle = document.querySelector('.contact-form__title');
+    var formSub = document.querySelector('.contact-form__subtitle');
+    var calTitle = document.querySelector('.calendar-placeholder__title');
+    var calDesc = document.querySelector('.calendar-placeholder__desc');
+
+    if (label && page.heroLabel) label.textContent = page.heroLabel;
+    if (title && page.heroTitle) title.textContent = page.heroTitle;
+    if (desc && page.heroDescription) desc.textContent = page.heroDescription;
+    if (formTitle && page.formTitle) formTitle.textContent = page.formTitle;
+    if (formSub && page.formSubtitle) formSub.textContent = page.formSubtitle;
+    if (calTitle && page.calendarTitle) calTitle.textContent = page.calendarTitle;
+    if (calDesc && page.calendarDescription) calDesc.textContent = page.calendarDescription;
+
+    // Steps
+    if (page.stepsHeading) {
+      var stepsH = document.querySelector('.contact-info').parentElement.querySelector('h3');
+      if (stepsH) stepsH.textContent = page.stepsHeading;
+    }
+    if (page.steps && page.steps.length > 0) {
+      var cards = document.querySelectorAll('.contact-card');
+      page.steps.forEach(function(step, i) {
+        if (cards[i]) {
+          var lbl = cards[i].querySelector('.contact-card__label');
+          var val = cards[i].querySelector('.contact-card__value');
+          if (lbl && step.label) lbl.textContent = step.label;
+          if (val && step.value) val.textContent = step.value;
+        }
+      });
+    }
+  });
+})();
+</script>
+
 </body>
 </html>

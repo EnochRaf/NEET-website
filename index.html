@@ -2372,118 +2372,87 @@ document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
   });
 })();
 
-// ── SANITY CMS CONTENT ───────────────────────
+
+</script>
+
+<!-- Sanity CMS -->
+<script src="lib/sanity.js"></script>
+<script>
+// ── Page-specific Sanity content (hero, articles, team member) ──
 (function() {
-  const PROJECT_ID = '98iuxa94';
-  const DATASET = 'production';
-  const API = `https://${PROJECT_ID}.api.sanity.io/v2024-01-01/data/query/${DATASET}`;
-
-  function sanityImageUrl(ref) {
-    if (!ref || !ref.asset || !ref.asset._ref) return '';
-    const parts = ref.asset._ref.replace('image-', '').split('-');
-    const ext = parts.pop();
-    const id = parts.join('-');
-    return `https://cdn.sanity.io/images/${PROJECT_ID}/${DATASET}/${id}.${ext}`;
-  }
-
-  function blocksToHtml(blocks) {
-    if (!blocks) return '';
-    return blocks
-      .filter(b => b._type === 'block')
-      .map(b => {
-        const text = b.children.map(c => {
-          let t = c.text;
-          if (c.marks && c.marks.includes('strong')) t = `<strong>${t}</strong>`;
-          if (c.marks && c.marks.includes('em')) t = `<em>${t}</em>`;
-          return t;
-        }).join('');
-        if (b.style === 'h2') return `<h2>${text}</h2>`;
-        if (b.style === 'blockquote') return `<blockquote>${text}</blockquote>`;
-        return `<p>${text}</p>`;
-      })
-      .join('');
-  }
-
-  function query(groq) {
-    return fetch(`${API}?query=${encodeURIComponent(groq)}`)
-      .then(r => r.json())
-      .then(d => d.result);
-  }
+  var cms = window.sanityCMS;
+  if (!cms) return;
 
   // ── Hero Section ──
-  query('*[_type == "heroContent"][0]').then(hero => {
+  cms.query('*[_type == "heroContent"][0]').then(function(hero) {
     if (!hero) return;
-    const label = document.querySelector('.hero__label');
-    const title = document.querySelector('.hero__title');
-    const subtitle = document.querySelector('.hero__subtitle');
-    const cta = document.querySelector('.hero__cta');
-    const img = document.querySelector('.hero__image');
+    var label = document.querySelector('.hero__label');
+    var title = document.querySelector('.hero__title');
+    var subtitle = document.querySelector('.hero__subtitle');
+    var cta = document.querySelector('.hero__cta');
+    var img = document.querySelector('.hero__image');
 
     if (label && hero.label) label.textContent = hero.label;
     if (title && hero.titleLine1) {
-      title.innerHTML = `${hero.titleLine1} <em>${hero.titleAccent || ''}</em><br>${hero.titleLine2 || ''}`;
+      title.innerHTML = hero.titleLine1 + ' <em>' + (hero.titleAccent || '') + '</em><br>' + (hero.titleLine2 || '');
     }
     if (subtitle && hero.subtitle) subtitle.textContent = hero.subtitle;
     if (cta && hero.ctaText) cta.textContent = hero.ctaText;
     if (cta && hero.ctaLink) cta.href = hero.ctaLink;
-    if (img && hero.backgroundImage) img.src = sanityImageUrl(hero.backgroundImage);
+    if (img && hero.backgroundImage) img.src = cms.imageUrl(hero.backgroundImage);
   });
 
   // ── Articles / What We Are Seeing ──
-  query('*[_type == "article"] | order(order asc){ title, slug, category, excerpt, image }').then(articles => {
+  cms.query('*[_type == "article"] | order(order asc){ title, slug, category, excerpt, image }').then(function(articles) {
     if (!articles || articles.length === 0) return;
-    const row = document.getElementById('read-row');
+    var row = document.getElementById('read-row');
     if (!row) return;
-    row.innerHTML = articles.map(a => `
-      <a href="articles/${a.slug?.current || '#'}.html" class="blog-card">
-        <div class="blog-card__image-wrap"><img src="${sanityImageUrl(a.image)}" alt="${a.title}"></div>
-        <div class="blog-card__meta">
-          <span class="blog-card__category">${a.category || ''}</span>
-        </div>
-        <h3 class="blog-card__title">${a.title}</h3>
-        <p class="blog-card__excerpt">${a.excerpt || ''}</p>
-      </a>
-    `).join('');
+    row.innerHTML = articles.map(function(a) {
+      return '<a href="articles/' + (a.slug && a.slug.current ? a.slug.current : '#') + '.html" class="blog-card">'
+        + '<div class="blog-card__image-wrap"><img src="' + cms.imageUrl(a.image) + '" alt="' + a.title + '"></div>'
+        + '<div class="blog-card__meta"><span class="blog-card__category">' + (a.category || '') + '</span></div>'
+        + '<h3 class="blog-card__title">' + a.title + '</h3>'
+        + '<p class="blog-card__excerpt">' + (a.excerpt || '') + '</p>'
+        + '</a>';
+    }).join('');
   });
 
   // ── Team Member / Meet NEET ──
-  query('*[_type == "teamMember"][0]').then(member => {
+  cms.query('*[_type == "teamMember"][0]').then(function(member) {
     if (!member) return;
-    const label = document.querySelector('.meet-neet__label');
-    const name = document.querySelector('.meet-neet__name');
-    const content = document.querySelector('.meet-neet-section__content');
-    const photo = document.querySelector('.meet-neet-section__photo img');
+    var label = document.querySelector('.meet-neet__label');
+    var name = document.querySelector('.meet-neet__name');
+    var content = document.querySelector('.meet-neet-section__content');
+    var photo = document.querySelector('.meet-neet-section__photo img');
 
     if (label && member.jobTitle) label.textContent = member.jobTitle;
     if (name && member.name) name.textContent = member.name;
     if (photo && member.photo) {
-      photo.src = sanityImageUrl(member.photo);
-      photo.alt = `${member.name} — ${member.jobTitle}`;
+      photo.src = cms.imageUrl(member.photo);
+      photo.alt = member.name + ' — ' + member.jobTitle;
     }
 
     if (content && member.bio) {
-      const bioHtml = member.bio
-        .filter(b => b._type === 'block')
-        .map(b => {
-          const text = b.children.map(c => c.text).join('');
-          return `<p class="meet-neet__text">${text}</p>`;
+      var bioHtml = member.bio
+        .filter(function(b) { return b._type === 'block'; })
+        .map(function(b) {
+          var text = b.children.map(function(c) { return c.text; }).join('');
+          return '<p class="meet-neet__text">' + text + '</p>';
         })
         .join('');
 
-      const pullQuote = member.pullQuote
-        ? `<p class="meet-neet__text" style="font-size:17px; font-weight:500; color:var(--text); margin:24px 0;">${member.pullQuote}</p>`
+      var pullQuote = member.pullQuote
+        ? '<p class="meet-neet__text" style="font-size:17px; font-weight:500; color:var(--text); margin:24px 0;">' + member.pullQuote + '</p>'
         : '';
 
-      const credentials = member.credentials
-        ? `<ul class="meet-neet__credentials">${member.credentials.map(c =>
-            `<li><strong>${c.label}</strong>${c.description}</li>`
-          ).join('')}</ul>`
+      var credentials = member.credentials
+        ? '<ul class="meet-neet__credentials">' + member.credentials.map(function(c) {
+            return '<li><strong>' + c.label + '</strong>' + c.description + '</li>';
+          }).join('') + '</ul>'
         : '';
 
-      // Replace everything after the name
-      const nameEl = content.querySelector('.meet-neet__name');
+      var nameEl = content.querySelector('.meet-neet__name');
       if (nameEl) {
-        // Remove existing content after name
         while (nameEl.nextSibling) nameEl.nextSibling.remove();
         nameEl.insertAdjacentHTML('afterend', bioHtml + pullQuote + credentials);
       }
