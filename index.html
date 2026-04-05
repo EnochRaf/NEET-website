@@ -350,6 +350,15 @@ ul { list-style: none; }
   color: var(--white);
 }
 
+.hero__payment-note {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.45);
+  margin-top: 18px;
+}
+
 
 /* ============================================
    BLOG CARDS
@@ -1359,8 +1368,9 @@ ul { list-style: none; }
 /* Bottom bar */
 .footer__bottom {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  gap: 6px;
   padding-top: 24px;
   border-top: 1px solid var(--border);
 }
@@ -1370,6 +1380,13 @@ ul { list-style: none; }
   font-weight: 400;
   letter-spacing: 0.02em;
   color: var(--text-muted);
+}
+
+.footer__crypto-note {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text);
+  opacity: 0.5;
 }
 
 @media (max-width: 1024px) {
@@ -1969,6 +1986,7 @@ ul { list-style: none; }
       <h1 class="hero__title">Designed With <em>Intention.</em><br>Built Without Regret.</h1>
       <p class="hero__subtitle">We plan every detail before anything is purchased so your home is executed with clarity, not guesswork.</p>
       <a href="contact.html" class="hero__cta">Start Your Project</a>
+      <p class="hero__payment-note">Payment options available, including crypto.</p>
     </div>
   </div>
 </section>
@@ -2311,6 +2329,7 @@ ul { list-style: none; }
     </div>
     <div class="footer__bottom">
       <div class="footer__copyright">&copy; 2026 NEET Design Group. All rights reserved.</div>
+      <div class="footer__crypto-note">We accept crypto by invoice. Ask us for details.</div>
     </div>
   </div>
 </footer>
