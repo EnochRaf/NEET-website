@@ -39,7 +39,7 @@ export const footer = defineType({
       name: 'phone',
       title: 'Phone Number',
       type: 'string',
-      description: 'e.g. (858) 260-9997',
+      description: 'e.g. (858) 250-9997',
     }),
     defineField({
       name: 'email',
