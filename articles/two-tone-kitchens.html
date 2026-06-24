@@ -39,29 +39,34 @@ ul { list-style: none; }
 .navbar__mobile-toggle svg { width: 22px; height: 22px; stroke: var(--text); fill: none; stroke-width: 1.5; }
 
 /* ARTICLE */
-.article-hero { position: relative; width: 100%; height: clamp(300px, 45vw, 520px); overflow: hidden; }
-.article-hero img { width: 100%; height: 100%; object-fit: cover; }
-.article-hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%); }
+.article-hero { position: relative; width: 100%; height: clamp(340px, 50vw, 580px); overflow: hidden; }
+.article-hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.article-hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%); }
 
 .article-content { max-width: 760px; margin: 0 auto; padding: 0 var(--margin); }
 
-.article-header { padding: 48px 0 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
-.article-header__meta { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.article-header { padding: 52px 0 36px; border-bottom: 1px solid var(--border); margin-bottom: 44px; }
+.article-header__meta { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; }
 .article-header__cat { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
 .article-header__dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-muted); }
 .article-header__date { font-size: 11px; color: var(--text-muted); }
-.article-header__title { font-family: var(--serif); font-size: clamp(32px, 4vw, 48px); font-weight: 300; line-height: 1.15; margin-bottom: 16px; }
-.article-header__excerpt { font-size: 17px; font-weight: 300; line-height: 1.7; color: var(--text-light); font-style: italic; }
+.article-header__title { font-family: var(--serif); font-size: clamp(34px, 4.5vw, 52px); font-weight: 300; line-height: 1.12; margin-bottom: 20px; letter-spacing: -0.01em; }
+.article-header__excerpt { font-family: var(--serif); font-size: clamp(17px, 2vw, 20px); font-weight: 300; line-height: 1.65; color: var(--text-light); font-style: italic; }
 
-.article-body { padding-bottom: 60px; }
-.article-body h2 { font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; margin-top: 48px; display: flex; align-items: center; gap: 10px; }
-.article-body h2::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
-.article-body p { font-size: 16px; font-weight: 300; line-height: 1.85; color: var(--text-light); margin-bottom: 20px; }
+.article-body { padding-bottom: 72px; }
+.article-body h2 { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; margin-top: 52px; display: flex; align-items: center; gap: 12px; }
+.article-body h2::before { content: ''; width: 24px; height: 1px; background: var(--accent); flex-shrink: 0; }
+.article-body p { font-size: 16px; font-weight: 300; line-height: 1.9; color: var(--text-light); margin-bottom: 22px; }
+.article-body p:first-child { font-size: 17px; line-height: 1.85; }
 
-.article-body .pullquote { margin: 48px 0; padding: 32px 36px; background: var(--white); border-left: 3px solid var(--accent); border-radius: 4px; }
-.article-body .pullquote p { font-family: var(--serif); font-size: clamp(20px, 2vw, 26px); font-weight: 400; font-style: italic; line-height: 1.5; color: var(--text); margin-bottom: 0; }
+.article-body .pullquote { margin: 56px 0; padding: 36px 40px; background: var(--bg-card); border-left: 3px solid var(--accent); border-radius: 0 4px 4px 0; }
+.article-body .pullquote p { font-family: var(--serif); font-size: clamp(21px, 2.2vw, 27px); font-weight: 400; font-style: italic; line-height: 1.55; color: var(--text); margin-bottom: 0; }
 
-.article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 48px; padding: 10px 0; }
+.article-divider { width: 40px; height: 1px; background: var(--border); margin: 48px 0; }
+
+.article-closing { font-family: var(--serif); font-size: clamp(17px, 2vw, 20px); font-weight: 300; line-height: 1.7; color: var(--text); font-style: italic; margin-bottom: 22px; }
+
+.article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 56px; padding: 10px 0; margin-top: 8px; }
 .article-back:hover { color: var(--accent-hover); }
 .article-back svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
@@ -71,6 +76,7 @@ ul { list-style: none; }
   :root { --margin: 20px; }
   .navbar__links, .navbar__cta { display: none; }
   .navbar__mobile-toggle { display: block; }
+  .article-body .pullquote { padding: 28px 24px; }
 }
 
 /* ── Footer ── */
@@ -200,7 +206,7 @@ ul { list-style: none; }
       <li><a href="../index.html#process">Process</a></li>
       <li><a href="../contact.html">Contact</a></li>
     </ul>
-    <a href="../index.html#footer" class="navbar__cta">Start Your Project</a>
+    <a href="../contact.html" class="navbar__cta">Start Your Project</a>
     <button class="navbar__mobile-toggle" aria-label="Menu">
       <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
@@ -208,7 +214,7 @@ ul { list-style: none; }
 </nav>
 
 <div class="article-hero">
-  <img src="../images/portfolio/kitchen-2.jpg" alt="Two-Tone Kitchens: The Trend That Stays">
+  <img src="../images/portfolio/kit2-01.png" alt="Two-Tone Kitchens: The Trend That Stays">
   <div class="article-hero__overlay"></div>
 </div>
 
@@ -220,26 +226,46 @@ ul { list-style: none; }
       <span class="article-header__date">Mar 12, 2026</span>
     </div>
     <h1 class="article-header__title">Two-Tone Kitchens: The Trend That Stays</h1>
-    <p class="article-header__excerpt">Why mixing cabinet colors creates depth and personality in any kitchen — and how to get it right.</p>
+    <p class="article-header__excerpt">Mixing cabinet colors isn't a shortcut to personality — it's a design strategy. When done with intention, two-tone kitchens create depth, visual balance, and a sense of custom craftsmanship that a single color simply cannot achieve.</p>
   </div>
 
   <div class="article-body">
-    <p>Two-tone kitchens aren't a passing trend — they're a design strategy. By splitting your palette between upper and lower cabinets, or between the island and the perimeter, you create depth that a single color simply can't achieve.</p>
 
-    <h2>The Challenge</h2>
-    <p>This kitchen had a large footprint but felt flat and monotonous with its original all-white cabinetry. The homeowners loved cooking and entertaining but felt the space lacked personality and warmth.</p>
+    <p>Every few years, a design idea surfaces that people assume is a trend — something fashionable right now that will eventually feel dated. Two-tone kitchens are not that. They are rooted in the same principle that has guided great interior design for generations: contrast creates interest, and intention creates longevity. When the color split is thoughtful rather than arbitrary, it reads not as a moment in time but as a considered decision made by someone who understood the space.</p>
 
-    <h2>The Choices We Made</h2>
-    <p>We introduced a deep blue island to anchor the center of the room while keeping the perimeter cabinets white for brightness. A stacked stone backsplash added organic texture. The wine cooler and open shelving were positioned for entertaining flow, and bar stools with woven seats brought in a coastal warmth that tied the two tones together.</p>
+    <h2>Why It Endures</h2>
+    <p>The appeal of two-tone cabinetry goes deeper than aesthetics. It solves a real design problem — how to make a large kitchen feel broken up and layered without adding unnecessary complexity. A single cabinet color across an entire kitchen, especially in an open-plan home, can feel flat. It asks one element to do everything. Splitting the palette allows each zone to have its own visual weight while still reading as a cohesive whole.</p>
+    <p>This is why I keep returning to the approach in projects of all sizes. Whether the kitchen is compact or expansive, the two-tone principle creates a sense of architecture — as if the cabinetry was built in rather than simply installed.</p>
+
+    <h2>The Power of Contrast</h2>
+    <p>The most successful two-tone kitchens I've designed lean into contrast rather than trying to blend. A warm white perimeter with a deep navy or forest green island is more compelling than two adjacent neutrals that almost — but not quite — match. When the contrast is deliberate, both tones look chosen. When it's timid, both tones look like accidents.</p>
+    <p>That said, contrast doesn't always mean bold color. Pairing a soft linen upper cabinet with a warm walnut lower creates just as much depth as a high-contrast pairing — it simply does so with restraint. The goal is always to make the space feel considered, not decorated.</p>
+
+    <h2>Grounding the Space</h2>
+    <p>One of the most effective applications of the two-tone approach is using a darker or richer tone on the lower cabinets or island while keeping the uppers lighter. This technique mirrors the way we experience the natural world — sky above, earth below — and it creates an immediate sense of stability and groundedness in the room. Darker lower cabinets also have a practical advantage: they conceal daily wear and scuffs better than lighter finishes, making them as functional as they are beautiful.</p>
+    <p>The island, when present, is often the best place to introduce the secondary tone. It becomes the furniture piece of the kitchen — a moment of intention at the center of the room that anchors everything around it.</p>
+
+    <h2>Hardware & the Details That Tie It Together</h2>
+    <p>Hardware selection is what transforms a two-tone kitchen from a good idea into a finished design. The hardware must speak to both cabinet colors simultaneously, which means the finish needs to work as a bridge rather than a feature. Brushed brass or unlacquered brass tends to warm both cool and neutral tones beautifully. Matte black reads cleanly against deeper cabinetry while still feeling intentional against lighter uppers. Chrome and polished nickel suit more contemporary pairings.</p>
+    <p>Countertop material plays an equally important role. A stone with movement — veining, variation, depth — can carry visual continuity across the cabinet split and prevent the two zones from feeling disconnected. A flat, uniform surface, while elegant on its own, can sometimes emphasize the break rather than bridge it.</p>
 
     <div class="pullquote">
-      <p>The kitchen went from builder-grade to custom in feel. The two-tone approach gave it a sense of furniture — like each piece was chosen, not just installed. The homeowners now host weekly dinners they used to avoid.</p>
+      <p>The kitchen went from builder-grade to custom in feel. The two-tone approach gave it a sense of furniture — like each piece was chosen, not just installed.</p>
     </div>
+
+    <p>Getting the proportions right is the final piece. Which tone covers more surface area? How much of the island is visible from the main entry point? These are the questions that shape the outcome. I always study the kitchen's sightlines before committing to a direction, because a beautiful color combination can still feel off if the visual balance is wrong from the angle you see it most.</p>
+
+    <div class="article-divider"></div>
+
+    <p class="article-closing">Two-tone kitchens endure because they reflect something true about how we want our homes to feel — layered, personal, and assembled with care. The kitchen is the most-used room in the house. It deserves more than one note.</p>
+
+    <p class="article-closing">When every decision has a reason behind it, the result is a space that feels like it couldn't have been designed any other way.</p>
 
     <a href="../articles.html" class="article-back">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
       Back to All Articles
     </a>
+
   </div>
 </div>
 
@@ -315,9 +341,6 @@ ul { list-style: none; }
     </div>
   </div>
 </footer>
-
-<!-- Sanity CMS -->
-<script src="../lib/sanity.js"></script>
 
 </body>
 </html>
