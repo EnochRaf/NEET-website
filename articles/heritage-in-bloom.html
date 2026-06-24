@@ -39,29 +39,34 @@ ul { list-style: none; }
 .navbar__mobile-toggle svg { width: 22px; height: 22px; stroke: var(--text); fill: none; stroke-width: 1.5; }
 
 /* ARTICLE */
-.article-hero { position: relative; width: 100%; height: clamp(300px, 45vw, 520px); overflow: hidden; }
-.article-hero img { width: 100%; height: 100%; object-fit: cover; }
-.article-hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%); }
+.article-hero { position: relative; width: 100%; height: clamp(340px, 50vw, 580px); overflow: hidden; }
+.article-hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.article-hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%); }
 
 .article-content { max-width: 760px; margin: 0 auto; padding: 0 var(--margin); }
 
-.article-header { padding: 48px 0 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
-.article-header__meta { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.article-header { padding: 52px 0 36px; border-bottom: 1px solid var(--border); margin-bottom: 44px; }
+.article-header__meta { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; }
 .article-header__cat { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
 .article-header__dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-muted); }
 .article-header__date { font-size: 11px; color: var(--text-muted); }
-.article-header__title { font-family: var(--serif); font-size: clamp(32px, 4vw, 48px); font-weight: 300; line-height: 1.15; margin-bottom: 16px; }
-.article-header__excerpt { font-size: 17px; font-weight: 300; line-height: 1.7; color: var(--text-light); font-style: italic; }
+.article-header__title { font-family: var(--serif); font-size: clamp(34px, 4.5vw, 52px); font-weight: 300; line-height: 1.12; margin-bottom: 20px; letter-spacing: -0.01em; }
+.article-header__excerpt { font-family: var(--serif); font-size: clamp(17px, 2vw, 20px); font-weight: 300; line-height: 1.65; color: var(--text-light); font-style: italic; }
 
-.article-body { padding-bottom: 60px; }
-.article-body h2 { font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; margin-top: 48px; display: flex; align-items: center; gap: 10px; }
-.article-body h2::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
-.article-body p { font-size: 16px; font-weight: 300; line-height: 1.85; color: var(--text-light); margin-bottom: 20px; }
+.article-body { padding-bottom: 72px; }
+.article-body h2 { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; margin-top: 52px; display: flex; align-items: center; gap: 12px; }
+.article-body h2::before { content: ''; width: 24px; height: 1px; background: var(--accent); flex-shrink: 0; }
+.article-body p { font-size: 16px; font-weight: 300; line-height: 1.9; color: var(--text-light); margin-bottom: 22px; }
+.article-body p:first-child { font-size: 17px; line-height: 1.85; }
 
-.article-body .pullquote { margin: 48px 0; padding: 32px 36px; background: var(--white); border-left: 3px solid var(--accent); border-radius: 4px; }
-.article-body .pullquote p { font-family: var(--serif); font-size: clamp(20px, 2vw, 26px); font-weight: 400; font-style: italic; line-height: 1.5; color: var(--text); margin-bottom: 0; }
+.article-body .pullquote { margin: 56px 0; padding: 36px 40px; background: var(--bg-card); border-left: 3px solid var(--accent); border-radius: 0 4px 4px 0; }
+.article-body .pullquote p { font-family: var(--serif); font-size: clamp(21px, 2.2vw, 27px); font-weight: 400; font-style: italic; line-height: 1.55; color: var(--text); margin-bottom: 0; }
 
-.article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 48px; padding: 10px 0; }
+.article-divider { width: 40px; height: 1px; background: var(--border); margin: 48px 0; }
+
+.article-closing { font-family: var(--serif); font-size: clamp(17px, 2vw, 20px); font-weight: 300; line-height: 1.7; color: var(--text); font-style: italic; margin-bottom: 22px; }
+
+.article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 56px; padding: 10px 0; margin-top: 8px; }
 .article-back:hover { color: var(--accent-hover); }
 .article-back svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
@@ -71,6 +76,7 @@ ul { list-style: none; }
   :root { --margin: 20px; }
   .navbar__links, .navbar__cta { display: none; }
   .navbar__mobile-toggle { display: block; }
+  .article-body .pullquote { padding: 28px 24px; }
 }
 
 /* ── Footer ── */
@@ -200,7 +206,7 @@ ul { list-style: none; }
       <li><a href="../index.html#process">Process</a></li>
       <li><a href="../contact.html">Contact</a></li>
     </ul>
-    <a href="../index.html#footer" class="navbar__cta">Start Your Project</a>
+    <a href="../contact.html" class="navbar__cta">Start Your Project</a>
     <button class="navbar__mobile-toggle" aria-label="Menu">
       <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
@@ -208,7 +214,7 @@ ul { list-style: none; }
 </nav>
 
 <div class="article-hero">
-  <img src="../images/portfolio/bathroom-2.jpg" alt="The Spring Collection: Heritage in Bloom">
+  <img src="../images/portfolio/bath3-01.png" alt="The Spring Collection: Heritage in Bloom">
   <div class="article-hero__overlay"></div>
 </div>
 
@@ -220,26 +226,45 @@ ul { list-style: none; }
       <span class="article-header__date">Mar 15, 2026</span>
     </div>
     <h1 class="article-header__title">The Spring Collection: Heritage in Bloom</h1>
-    <p class="article-header__excerpt">After months of cozy, quiet winter, our spring collection invites a fresh reset with organic textures.</p>
+    <p class="article-header__excerpt">Spring has always been one of my favorite seasons to design for — the light changes, every space feels ready for a fresh beginning, and there is no better time to honor timeless materials that make a home feel truly grounded.</p>
   </div>
 
   <div class="article-body">
-    <p>Every spring, we revisit what it means to bring warmth and life back into a space. This year's collection draws from heritage craftsmanship — handmade tiles, natural stone, and textured linens that feel like they've always belonged.</p>
 
-    <h2>The Challenge</h2>
-    <p>The homeowner wanted a bathroom that felt spa-like but not sterile. They were drawn to bold pattern but worried it would overwhelm a smaller space. The existing layout had poor lighting and dated fixtures that made the room feel closed off.</p>
+    <p>Spring has always been one of my favorite seasons to design for. There's something special about the way nature awakens after a quiet winter — the colors soften, the light changes, and every space feels ready for a fresh beginning. When creating this collection, I wanted to capture that feeling of renewal while honoring the timeless elements that make a home feel grounded and enduring.</p>
 
-    <h2>The Choices We Made</h2>
-    <p>We chose a blue floral encaustic tile as the anchor wall — bold enough to make a statement but contained to one surface so it wouldn't dominate. Copper globe pendants replaced the old recessed cans, adding warmth and drawing the eye upward. The dark vanity cabinetry grounds the room while the round mirrors soften the geometry of the tile pattern.</p>
+    <h2>The Inspiration</h2>
+    <p>The inspiration behind this bathroom was the balance between heritage and nature. Rather than chasing trends, I focused on materials and design choices that would feel beautiful today and remain elegant for years to come. Every element was selected with intention — from the warm wood tones to the organic textures and carefully layered lighting.</p>
+
+    <h2>A Natural Palette</h2>
+    <p>One of the first decisions I made was to establish a natural palette. The rich wood paneling creates warmth and comfort, while the living moss feature wall introduces a sense of life and connection to the outdoors. I love incorporating natural elements whenever possible because they instantly bring calmness into a space and create an environment that feels restorative rather than purely functional.</p>
+
+    <h2>The Focal Point</h2>
+    <p>The freestanding bathtub serves as the focal point of the room. Its sculptural silhouette provides softness against the structured architectural lines surrounding it. I wanted the bathing experience to feel luxurious yet approachable — something that transforms an everyday routine into a moment of relaxation and self-care.</p>
+
+    <h2>Layered Lighting</h2>
+    <p>Lighting played an equally important role in shaping the atmosphere. Instead of relying on a single source of illumination, I layered multiple light fixtures throughout the space. The woven pendant above the tub introduces texture and warmth, while the modern globe sconces add refinement and balance. Together, they create a soft glow that enhances the natural materials and makes the room feel inviting throughout the day and into the evening.</p>
+
+    <h2>Details That Make the Difference</h2>
+    <p>Attention to detail is often what separates a beautiful room from a truly memorable one. The open shelving, woven storage baskets, curated accessories, and carefully selected greenery were all chosen to add depth and personality without overwhelming the design. Each piece has a purpose, contributing to both the functionality and the overall story of the space.</p>
 
     <div class="pullquote">
-      <p>The finished space feels like a boutique hotel — rich, layered, and intentional. The homeowner said it's the first room in the house that makes them stop and breathe. That's what heritage in bloom looks like.</p>
+      <p>Luxury should never feel intimidating. The goal is always to create environments that welcome you in, support your daily routines, and bring a sense of peace to your home.</p>
     </div>
+
+    <p>What I appreciate most about this collection is its ability to blend sophistication with comfort. When a space can do both — hold its design integrity while still feeling like somewhere you genuinely want to be — that is when the work feels complete.</p>
+
+    <div class="article-divider"></div>
+
+    <p class="article-closing">As we move into spring, I hope this collection inspires you to embrace natural textures, thoughtful details, and timeless design principles. Sometimes the most impactful transformations come not from dramatic changes, but from carefully chosen elements that work together in harmony.</p>
+
+    <p class="article-closing">After all, great design is never just about how a space looks — it's about how it makes you feel.</p>
 
     <a href="../articles.html" class="article-back">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
       Back to All Articles
     </a>
+
   </div>
 </div>
 
@@ -315,9 +340,6 @@ ul { list-style: none; }
     </div>
   </div>
 </footer>
-
-<!-- Sanity CMS -->
-<script src="../lib/sanity.js"></script>
 
 </body>
 </html>
