@@ -39,29 +39,34 @@ ul { list-style: none; }
 .navbar__mobile-toggle svg { width: 22px; height: 22px; stroke: var(--text); fill: none; stroke-width: 1.5; }
 
 /* ARTICLE */
-.article-hero { position: relative; width: 100%; height: clamp(300px, 45vw, 520px); overflow: hidden; }
-.article-hero img { width: 100%; height: 100%; object-fit: cover; }
-.article-hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%); }
+.article-hero { position: relative; width: 100%; height: clamp(340px, 50vw, 580px); overflow: hidden; }
+.article-hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.article-hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%); }
 
 .article-content { max-width: 760px; margin: 0 auto; padding: 0 var(--margin); }
 
-.article-header { padding: 48px 0 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
-.article-header__meta { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.article-header { padding: 52px 0 36px; border-bottom: 1px solid var(--border); margin-bottom: 44px; }
+.article-header__meta { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; }
 .article-header__cat { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
 .article-header__dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-muted); }
 .article-header__date { font-size: 11px; color: var(--text-muted); }
-.article-header__title { font-family: var(--serif); font-size: clamp(32px, 4vw, 48px); font-weight: 300; line-height: 1.15; margin-bottom: 16px; }
-.article-header__excerpt { font-size: 17px; font-weight: 300; line-height: 1.7; color: var(--text-light); font-style: italic; }
+.article-header__title { font-family: var(--serif); font-size: clamp(34px, 4.5vw, 52px); font-weight: 300; line-height: 1.12; margin-bottom: 20px; letter-spacing: -0.01em; }
+.article-header__excerpt { font-family: var(--serif); font-size: clamp(17px, 2vw, 20px); font-weight: 300; line-height: 1.65; color: var(--text-light); font-style: italic; }
 
-.article-body { padding-bottom: 60px; }
-.article-body h2 { font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; margin-top: 48px; display: flex; align-items: center; gap: 10px; }
-.article-body h2::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
-.article-body p { font-size: 16px; font-weight: 300; line-height: 1.85; color: var(--text-light); margin-bottom: 20px; }
+.article-body { padding-bottom: 72px; }
+.article-body h2 { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; margin-top: 52px; display: flex; align-items: center; gap: 12px; }
+.article-body h2::before { content: ''; width: 24px; height: 1px; background: var(--accent); flex-shrink: 0; }
+.article-body p { font-size: 16px; font-weight: 300; line-height: 1.9; color: var(--text-light); margin-bottom: 22px; }
+.article-body p:first-child { font-size: 17px; line-height: 1.85; }
 
-.article-body .pullquote { margin: 48px 0; padding: 32px 36px; background: var(--white); border-left: 3px solid var(--accent); border-radius: 4px; }
-.article-body .pullquote p { font-family: var(--serif); font-size: clamp(20px, 2vw, 26px); font-weight: 400; font-style: italic; line-height: 1.5; color: var(--text); margin-bottom: 0; }
+.article-body .pullquote { margin: 56px 0; padding: 36px 40px; background: var(--bg-card); border-left: 3px solid var(--accent); border-radius: 0 4px 4px 0; }
+.article-body .pullquote p { font-family: var(--serif); font-size: clamp(21px, 2.2vw, 27px); font-weight: 400; font-style: italic; line-height: 1.55; color: var(--text); margin-bottom: 0; }
 
-.article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 48px; padding: 10px 0; }
+.article-divider { width: 40px; height: 1px; background: var(--border); margin: 48px 0; }
+
+.article-closing { font-family: var(--serif); font-size: clamp(17px, 2vw, 20px); font-weight: 300; line-height: 1.7; color: var(--text); font-style: italic; margin-bottom: 22px; }
+
+.article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 56px; padding: 10px 0; margin-top: 8px; }
 .article-back:hover { color: var(--accent-hover); }
 .article-back svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
@@ -71,6 +76,7 @@ ul { list-style: none; }
   :root { --margin: 20px; }
   .navbar__links, .navbar__cta { display: none; }
   .navbar__mobile-toggle { display: block; }
+  .article-body .pullquote { padding: 28px 24px; }
 }
 
 /* ── Footer ── */
@@ -200,7 +206,7 @@ ul { list-style: none; }
       <li><a href="../index.html#process">Process</a></li>
       <li><a href="../contact.html">Contact</a></li>
     </ul>
-    <a href="../index.html#footer" class="navbar__cta">Start Your Project</a>
+    <a href="../contact.html" class="navbar__cta">Start Your Project</a>
     <button class="navbar__mobile-toggle" aria-label="Menu">
       <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
@@ -208,7 +214,7 @@ ul { list-style: none; }
 </nav>
 
 <div class="article-hero">
-  <img src="../images/portfolio/living-room-2.jpg" alt="The Art of the Conversation Area">
+  <img src="../images/portfolio/lr2-01.jpg" alt="The Art of the Conversation Area">
   <div class="article-hero__overlay"></div>
 </div>
 
@@ -220,26 +226,48 @@ ul { list-style: none; }
       <span class="article-header__date">Feb 24, 2026</span>
     </div>
     <h1 class="article-header__title">The Art of the Conversation Area</h1>
-    <p class="article-header__excerpt">Creating living room layouts that encourage connection with statement seating and intentional flow.</p>
+    <p class="article-header__excerpt">Most living rooms are organized around a screen. The best ones are organized around people — and the difference in how a room feels, and how it gets used, is complete.</p>
   </div>
 
   <div class="article-body">
-    <p>Most living rooms are designed around a TV. But the best ones are designed around people. A conversation area prioritizes connection — seating that faces each other, lighting that flatters, and a layout that invites you to sit down and stay.</p>
 
-    <h2>The Challenge</h2>
-    <p>This high-ceiling living room felt cavernous and cold. The homeowners had pushed all the furniture against the walls, leaving a vast empty center. The room was impressive in scale but uncomfortable to actually use.</p>
+    <p>There is a version of the living room that almost every home has: furniture pushed to the walls, a sofa aimed at the television, and an open center that nobody knows what to do with. It is a room you pass through rather than a room you inhabit. The scale might be generous, the finishes might be beautiful, but the layout works against connection — and connection is the entire point of a living room.</p>
 
-    <h2>The Choices We Made</h2>
-    <p>We pulled everything toward the center — two leather swivel chairs facing a green velvet sofa, anchored by a geometric coffee table. The ceiling height became an asset with a statement light fixture that draws the eye up without making the seating area feel lost. A credenza along the wall provides storage without cluttering the conversation zone.</p>
+    <h2>Diagnosing the Empty Center</h2>
+    <p>When I first walked into the living room in this project, I immediately understood the problem. The ceilings were high — over eleven feet — and the homeowners had responded by pushing every piece of furniture as close to the walls as possible, as if trying to fill the perimeter. The result was a large, impressive room that felt completely unusable. The sofa was so far from everything else that a conversation required raising your voice. The scale that should have been the room's greatest asset had become its biggest obstacle.</p>
+    <p>This is one of the most common instincts in large rooms, and it is almost always wrong. Furniture pulled to the walls does not make a room feel larger — it makes it feel emptier. The eye reads the space between pieces as absence rather than air. What actually makes a large room feel resolved and human-scaled is the opposite: furniture pulled toward the center, arranged with intention, so that the space between the seating group and the walls becomes a deliberate surround rather than dead zone.</p>
+
+    <h2>Building the Seating Group</h2>
+    <p>The fundamental unit of a conversation area is a seating group — a collection of pieces arranged so that people face each other rather than a screen. In this room, we anchored the group with a deep green velvet sofa along one axis and positioned two leather swivel chairs across from it. The swivel chairs were the pivotal decision. They allow whoever is sitting in them to rotate toward the sofa, toward the entry, toward a guest standing nearby — they make the seating flexible without making it feel unstable. In a room where multiple conversations might happen at once, that adaptability is essential.</p>
+    <p>A geometric coffee table occupies the center of the group — close enough to be useful, with a surface that holds drinks, books, and objects without visual clutter. The table's form creates visual geometry that holds the group together. It is the piece that makes the other pieces feel like they belong to each other.</p>
+    <p>The rug defines the conversation zone. I sized it generously — front legs of every piece sitting on the rug — so that the seating group reads as a unified space within the larger room. A rug that is too small fragments the group; it suggests that each piece arrived independently rather than as part of a considered whole. When the rug is right, the group feels settled.</p>
+
+    <h2>Using Ceiling Height as an Asset</h2>
+    <p>High ceilings are one of those features that clients love when they see them on a floor plan and then struggle with once they're living in the room. The vertical space draws the eye upward, which is wonderful when you have something worth looking at up there and disorienting when you don't. The solution is not to ignore the height — it is to address it directly.</p>
+    <p>In this room, we selected a statement light fixture — a large-scale pendant with architectural weight — and centered it directly above the conversation group. The fixture does several things at once: it gives the eye a landing point in the vertical space, it defines the seating area from above the way the rug defines it from below, and it brings the perceived ceiling height down to a human scale within the group without lowering it anywhere else. The room still reads as tall, but it no longer feels exposed.</p>
+    <p>Lighting temperature mattered here as much as fixture selection. We paired the statement pendant with layered ambient lighting — sconces and table lamps that warm the perimeter — so the room has range. Full brightness for daytime use, a lower combination of sconces and lamps for evenings when the quality of light becomes part of the atmosphere.</p>
+
+    <h2>Storage Without Disruption</h2>
+    <p>One of the persistent tensions in living room design is the need for storage versus the desire for clean visual space. This room had real storage needs — media equipment, books, objects accumulated over years of living — but I was not willing to let a wall of cabinetry fragment the room's architecture.</p>
+    <p>The answer was a credenza along the far wall: long and low, with a surface that doubles as display space. It provides substantial storage without rising into the sight lines from the seating group. The objects placed on top of it — a lamp, a few meaningful pieces, a plant — give the wall weight and life without competing with the conversation area. The credenza grounds that side of the room and gives the eye somewhere to settle when you look across the space.</p>
 
     <div class="pullquote">
-      <p>The room went from 'pass-through' to destination. The homeowners say they actually sit in their living room now — something they hadn't done in years. The swivel chairs were the key: they let you face whoever you're talking to.</p>
+      <p>The room went from a pass-through to a destination. The homeowners say they actually sit in their living room now — something they hadn't done in years. The swivel chairs were the key: they let you face whoever you're talking to.</p>
     </div>
+
+    <p>That is what a well-designed conversation area does. It does not just look good in photographs — it changes how a room gets lived in. People stay longer. Conversations run deeper. The room earns its square footage by becoming a place where something actually happens.</p>
+
+    <div class="article-divider"></div>
+
+    <p class="article-closing">A living room that centers the television is a room organized around passive consumption. A living room that centers the conversation is a room organized around the people who live there.</p>
+
+    <p class="article-closing">The furniture arrangement is the message. Make sure it says the right thing.</p>
 
     <a href="../articles.html" class="article-back">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
       Back to All Articles
     </a>
+
   </div>
 </div>
 
@@ -315,9 +343,6 @@ ul { list-style: none; }
     </div>
   </div>
 </footer>
-
-<!-- Sanity CMS -->
-<script src="../lib/sanity.js"></script>
 
 </body>
 </html>
