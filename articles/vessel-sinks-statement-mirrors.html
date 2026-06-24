@@ -39,29 +39,34 @@ ul { list-style: none; }
 .navbar__mobile-toggle svg { width: 22px; height: 22px; stroke: var(--text); fill: none; stroke-width: 1.5; }
 
 /* ARTICLE */
-.article-hero { position: relative; width: 100%; height: clamp(300px, 45vw, 520px); overflow: hidden; }
-.article-hero img { width: 100%; height: 100%; object-fit: cover; }
-.article-hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%); }
+.article-hero { position: relative; width: 100%; height: clamp(340px, 50vw, 580px); overflow: hidden; }
+.article-hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.article-hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%); }
 
 .article-content { max-width: 760px; margin: 0 auto; padding: 0 var(--margin); }
 
-.article-header { padding: 48px 0 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
-.article-header__meta { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.article-header { padding: 52px 0 36px; border-bottom: 1px solid var(--border); margin-bottom: 44px; }
+.article-header__meta { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; }
 .article-header__cat { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
 .article-header__dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-muted); }
 .article-header__date { font-size: 11px; color: var(--text-muted); }
-.article-header__title { font-family: var(--serif); font-size: clamp(32px, 4vw, 48px); font-weight: 300; line-height: 1.15; margin-bottom: 16px; }
-.article-header__excerpt { font-size: 17px; font-weight: 300; line-height: 1.7; color: var(--text-light); font-style: italic; }
+.article-header__title { font-family: var(--serif); font-size: clamp(34px, 4.5vw, 52px); font-weight: 300; line-height: 1.12; margin-bottom: 20px; letter-spacing: -0.01em; }
+.article-header__excerpt { font-family: var(--serif); font-size: clamp(17px, 2vw, 20px); font-weight: 300; line-height: 1.65; color: var(--text-light); font-style: italic; }
 
-.article-body { padding-bottom: 60px; }
-.article-body h2 { font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; margin-top: 48px; display: flex; align-items: center; gap: 10px; }
-.article-body h2::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
-.article-body p { font-size: 16px; font-weight: 300; line-height: 1.85; color: var(--text-light); margin-bottom: 20px; }
+.article-body { padding-bottom: 72px; }
+.article-body h2 { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; margin-top: 52px; display: flex; align-items: center; gap: 12px; }
+.article-body h2::before { content: ''; width: 24px; height: 1px; background: var(--accent); flex-shrink: 0; }
+.article-body p { font-size: 16px; font-weight: 300; line-height: 1.9; color: var(--text-light); margin-bottom: 22px; }
+.article-body p:first-child { font-size: 17px; line-height: 1.85; }
 
-.article-body .pullquote { margin: 48px 0; padding: 32px 36px; background: var(--white); border-left: 3px solid var(--accent); border-radius: 4px; }
-.article-body .pullquote p { font-family: var(--serif); font-size: clamp(20px, 2vw, 26px); font-weight: 400; font-style: italic; line-height: 1.5; color: var(--text); margin-bottom: 0; }
+.article-body .pullquote { margin: 56px 0; padding: 36px 40px; background: var(--bg-card); border-left: 3px solid var(--accent); border-radius: 0 4px 4px 0; }
+.article-body .pullquote p { font-family: var(--serif); font-size: clamp(21px, 2.2vw, 27px); font-weight: 400; font-style: italic; line-height: 1.55; color: var(--text); margin-bottom: 0; }
 
-.article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 48px; padding: 10px 0; }
+.article-divider { width: 40px; height: 1px; background: var(--border); margin: 48px 0; }
+
+.article-closing { font-family: var(--serif); font-size: clamp(17px, 2vw, 20px); font-weight: 300; line-height: 1.7; color: var(--text); font-style: italic; margin-bottom: 22px; }
+
+.article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 56px; padding: 10px 0; margin-top: 8px; }
 .article-back:hover { color: var(--accent-hover); }
 .article-back svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
@@ -71,6 +76,7 @@ ul { list-style: none; }
   :root { --margin: 20px; }
   .navbar__links, .navbar__cta { display: none; }
   .navbar__mobile-toggle { display: block; }
+  .article-body .pullquote { padding: 28px 24px; }
 }
 
 /* ── Footer ── */
@@ -200,7 +206,7 @@ ul { list-style: none; }
       <li><a href="../index.html#process">Process</a></li>
       <li><a href="../contact.html">Contact</a></li>
     </ul>
-    <a href="../index.html#footer" class="navbar__cta">Start Your Project</a>
+    <a href="../contact.html" class="navbar__cta">Start Your Project</a>
     <button class="navbar__mobile-toggle" aria-label="Menu">
       <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
@@ -208,7 +214,7 @@ ul { list-style: none; }
 </nav>
 
 <div class="article-hero">
-  <img src="../images/portfolio/bathroom-3.jpg" alt="Vessel Sinks & Statement Mirrors">
+  <img src="../images/portfolio/bath3-19.png" alt="Vessel Sinks & Statement Mirrors">
   <div class="article-hero__overlay"></div>
 </div>
 
@@ -219,27 +225,49 @@ ul { list-style: none; }
       <span class="article-header__dot"></span>
       <span class="article-header__date">Mar 5, 2026</span>
     </div>
-    <h1 class="article-header__title">Vessel Sinks & Statement Mirrors</h1>
-    <p class="article-header__excerpt">How to elevate your bathroom with sculptural basins and mirrors that double as art pieces.</p>
+    <h1 class="article-header__title">Vessel Sinks &amp; Statement Mirrors</h1>
+    <p class="article-header__excerpt">The vanity is the first thing you see when you walk into a bathroom. When the sink and mirror are treated as sculptural elements rather than standard fixtures, the entire room transforms around them.</p>
   </div>
 
   <div class="article-body">
-    <p>The vanity is the first thing you see when you walk into a bathroom. When the sink and mirror are treated as sculptural elements rather than just fixtures, the entire room elevates.</p>
 
-    <h2>The Challenge</h2>
-    <p>This guest bath had a standard double vanity with rectangular mirrors and basic faucets. It functioned fine but made no impression. The homeowner wanted guests to walk in and notice something special.</p>
+    <p>Most bathrooms are designed from the outside in — tile first, fixtures second, accessories last. The result is often a room that looks assembled rather than designed. When I approach a bathroom, I reverse that order. I start with the vanity wall, because the sink and mirror set the tone for everything else. Get those two elements right, and the rest of the room has something to respond to.</p>
 
-    <h2>The Choices We Made</h2>
-    <p>We selected vessel sinks on a fluted floating vanity — the raised basins immediately add dimension and a sense of craftsmanship. Hexagonal mirrors were chosen to break the expected rectangle pattern, and a green tile backsplash adds color without competing with the sink forms. Globe pendants hang at eye level, creating an intimate scale.</p>
+    <h2>The Vanity as the Anchor</h2>
+    <p>The vanity wall is the focal point of almost every bathroom — it is what you face when you enter, what you see when you stand at the sink, and what guests notice first. A well-considered vanity wall does more than hold plumbing. It establishes the design language of the entire room: the materiality, the scale, the level of craft. Treating it as an afterthought is one of the most common mistakes I see in bathroom design, and it is also one of the most reversible.</p>
+    <p>Two elements define the vanity wall above all others: the sink and the mirror. Everything else — the faucet, the lighting, the countertop surface — takes its cues from these two choices. When both are treated with intention, the room reads as designed. When either is generic, the room reads as finished.</p>
+
+    <h2>Why Vessel Sinks Work</h2>
+    <p>A vessel sink sits above the countertop rather than being recessed into it. That single distinction changes the entire visual dynamic of the vanity. The basin becomes an object — something with presence and form that commands attention rather than disappearing into the surface. In a space as compact as most bathrooms, that kind of visual interest is valuable. It gives the eye somewhere to land and something to appreciate.</p>
+    <p>Beyond aesthetics, vessel sinks introduce an element of materiality that undermount and drop-in styles rarely match. Stone vessels carry the weight and variation of natural material. Ceramic vessels bring sculptural form. Concrete vessels offer an industrial refinement. Each communicates something different about the space, and each elevates the vanity from a functional necessity to a considered design decision.</p>
+    <p>There are practical considerations worth acknowledging. Vessel sinks require a lower vanity height to maintain comfortable use, and the exposed faucet must be selected with the basin form in mind — a tall, sculptural faucet generally complements a vessel better than a low-profile one. These are details worth thinking through before purchasing, but they are not obstacles. They are simply part of the design conversation.</p>
+
+    <h2>The Mirror as Artwork</h2>
+    <p>The mirror is the largest decorative element on the vanity wall, and yet it is consistently the most underinvested piece in the bathroom. A frameless builder-grade rectangle is functional, but it contributes nothing. A statement mirror — one with an interesting shape, a crafted frame, or an unexpected scale — contributes everything. It anchors the vanity, adds architectural character, and often becomes the detail that makes the room feel finished in a way that nothing else can replicate.</p>
+    <p>Shape is where most of the design work happens. An arched mirror softens a bathroom with hard geometric lines and introduces a sense of warmth and elegance. A hexagonal or octagonal mirror adds structure and a handcrafted quality. An oversized rectangular mirror with a substantial frame reads like a piece of furniture — authoritative and refined. The shape you choose should respond to the forms already present in the room, either echoing them for cohesion or contrasting them for tension.</p>
+    <p>Finish matters equally. A brass or unlacquered metal frame ages beautifully and adds warmth to cooler palettes. A matte black frame is graphic and clean, well-suited to contemporary spaces. An antiqued or tortoiseshell frame brings depth and a sense of history. I always select the mirror finish in direct conversation with the faucet and hardware finish — these two elements should feel like they belong to the same family, even if they don't match exactly.</p>
+
+    <h2>Making Them Work Together</h2>
+    <p>The real design challenge is not choosing a great vessel sink or a beautiful mirror in isolation — it is making them work as a pair. The scale relationship between the two is critical. A small vessel sink beneath an oversized mirror can feel unmoored. A large basin under a mirror that barely clears it feels cramped. As a general principle, the mirror should be slightly narrower than the vanity cabinet and sit comfortably above the vessel without feeling stacked. There should be breathing room between the top of the basin and the bottom of the mirror — enough space to feel intentional, not enough to feel disconnected.</p>
+    <p>Lighting bridges the two elements. Sconces mounted at the sides of the mirror provide even illumination for the face without casting shadows, and they frame the vanity wall in a way that overhead lighting never achieves. A pendant hung between two mirrors, or a single pendant centered above a single vessel, introduces scale and intimacy. The fixture you choose should have a finish that connects to both the sink and the mirror — it is the thread that ties the composition together.</p>
 
     <div class="pullquote">
-      <p>Every guest comments on this bathroom now. The vessel sinks turn a utilitarian fixture into a conversation piece, and the hexagonal mirrors give the space an architectural quality that photographs beautifully.</p>
+      <p>Every guest comments on this bathroom now. The vessel sinks turn a utilitarian fixture into a conversation piece, and the mirrors give the space an architectural quality that stays with you long after you've left the room.</p>
     </div>
+
+    <p>When the vanity wall is resolved — sink, mirror, and lighting working as a unified composition — the rest of the bathroom becomes remarkably easy to design. The tile, the hardware, the accessories all fall into place because they have a clear point of reference. That is the real value of starting here.</p>
+
+    <div class="article-divider"></div>
+
+    <p class="article-closing">A bathroom doesn't need to be large to be beautiful. It needs two or three decisions made with real conviction — and the vanity wall is where those decisions live.</p>
+
+    <p class="article-closing">Choose the sink like you'd choose a sculpture. Choose the mirror like you'd choose a painting. The room will do the rest.</p>
 
     <a href="../articles.html" class="article-back">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
       Back to All Articles
     </a>
+
   </div>
 </div>
 
@@ -315,9 +343,6 @@ ul { list-style: none; }
     </div>
   </div>
 </footer>
-
-<!-- Sanity CMS -->
-<script src="../lib/sanity.js"></script>
 
 </body>
 </html>
