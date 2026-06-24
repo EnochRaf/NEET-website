@@ -39,29 +39,34 @@ ul { list-style: none; }
 .navbar__mobile-toggle svg { width: 22px; height: 22px; stroke: var(--text); fill: none; stroke-width: 1.5; }
 
 /* ARTICLE */
-.article-hero { position: relative; width: 100%; height: clamp(300px, 45vw, 520px); overflow: hidden; }
-.article-hero img { width: 100%; height: 100%; object-fit: cover; }
-.article-hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%); }
+.article-hero { position: relative; width: 100%; height: clamp(340px, 50vw, 580px); overflow: hidden; }
+.article-hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.article-hero__overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%); }
 
 .article-content { max-width: 760px; margin: 0 auto; padding: 0 var(--margin); }
 
-.article-header { padding: 48px 0 32px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
-.article-header__meta { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+.article-header { padding: 52px 0 36px; border-bottom: 1px solid var(--border); margin-bottom: 44px; }
+.article-header__meta { display: flex; align-items: center; gap: 8px; margin-bottom: 18px; }
 .article-header__cat { font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
 .article-header__dot { width: 3px; height: 3px; border-radius: 50%; background: var(--text-muted); }
 .article-header__date { font-size: 11px; color: var(--text-muted); }
-.article-header__title { font-family: var(--serif); font-size: clamp(32px, 4vw, 48px); font-weight: 300; line-height: 1.15; margin-bottom: 16px; }
-.article-header__excerpt { font-size: 17px; font-weight: 300; line-height: 1.7; color: var(--text-light); font-style: italic; }
+.article-header__title { font-family: var(--serif); font-size: clamp(34px, 4.5vw, 52px); font-weight: 300; line-height: 1.12; margin-bottom: 20px; letter-spacing: -0.01em; }
+.article-header__excerpt { font-family: var(--serif); font-size: clamp(17px, 2vw, 20px); font-weight: 300; line-height: 1.65; color: var(--text-light); font-style: italic; }
 
-.article-body { padding-bottom: 60px; }
-.article-body h2 { font-family: var(--sans); font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; margin-top: 48px; display: flex; align-items: center; gap: 10px; }
-.article-body h2::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
-.article-body p { font-size: 16px; font-weight: 300; line-height: 1.85; color: var(--text-light); margin-bottom: 20px; }
+.article-body { padding-bottom: 72px; }
+.article-body h2 { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; margin-top: 52px; display: flex; align-items: center; gap: 12px; }
+.article-body h2::before { content: ''; width: 24px; height: 1px; background: var(--accent); flex-shrink: 0; }
+.article-body p { font-size: 16px; font-weight: 300; line-height: 1.9; color: var(--text-light); margin-bottom: 22px; }
+.article-body p:first-child { font-size: 17px; line-height: 1.85; }
 
-.article-body .pullquote { margin: 48px 0; padding: 32px 36px; background: var(--white); border-left: 3px solid var(--accent); border-radius: 4px; }
-.article-body .pullquote p { font-family: var(--serif); font-size: clamp(20px, 2vw, 26px); font-weight: 400; font-style: italic; line-height: 1.5; color: var(--text); margin-bottom: 0; }
+.article-body .pullquote { margin: 56px 0; padding: 36px 40px; background: var(--bg-card); border-left: 3px solid var(--accent); border-radius: 0 4px 4px 0; }
+.article-body .pullquote p { font-family: var(--serif); font-size: clamp(21px, 2.2vw, 27px); font-weight: 400; font-style: italic; line-height: 1.55; color: var(--text); margin-bottom: 0; }
 
-.article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 48px; padding: 10px 0; }
+.article-divider { width: 40px; height: 1px; background: var(--border); margin: 48px 0; }
+
+.article-closing { font-family: var(--serif); font-size: clamp(17px, 2vw, 20px); font-weight: 300; line-height: 1.7; color: var(--text); font-style: italic; margin-bottom: 22px; }
+
+.article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 56px; padding: 10px 0; margin-top: 8px; }
 .article-back:hover { color: var(--accent-hover); }
 .article-back svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
 
@@ -71,6 +76,7 @@ ul { list-style: none; }
   :root { --margin: 20px; }
   .navbar__links, .navbar__cta { display: none; }
   .navbar__mobile-toggle { display: block; }
+  .article-body .pullquote { padding: 28px 24px; }
 }
 
 /* ── Footer ── */
@@ -200,7 +206,7 @@ ul { list-style: none; }
       <li><a href="../index.html#process">Process</a></li>
       <li><a href="../contact.html">Contact</a></li>
     </ul>
-    <a href="../index.html#footer" class="navbar__cta">Start Your Project</a>
+    <a href="../contact.html" class="navbar__cta">Start Your Project</a>
     <button class="navbar__mobile-toggle" aria-label="Menu">
       <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
@@ -208,7 +214,7 @@ ul { list-style: none; }
 </nav>
 
 <div class="article-hero">
-  <img src="../images/portfolio/bedroom-2.jpg" alt="Designing the Perfect Primary Suite">
+  <img src="../images/portfolio/br2-01.png" alt="Designing the Perfect Primary Suite">
   <div class="article-hero__overlay"></div>
 </div>
 
@@ -220,26 +226,48 @@ ul { list-style: none; }
       <span class="article-header__date">Mar 8, 2026</span>
     </div>
     <h1 class="article-header__title">Designing the Perfect Primary Suite</h1>
-    <p class="article-header__excerpt">From lighting to layout, the details that transform a bedroom into a true personal retreat.</p>
+    <p class="article-header__excerpt">The primary suite is the one room in the house that belongs entirely to you. Getting it right means thinking beyond furniture placement — it means designing for how you want to feel the moment you walk in and the moment you wake up.</p>
   </div>
 
   <div class="article-body">
-    <p>A primary suite isn't just where you sleep — it's where you start and end every day. Getting it right means thinking about light, texture, sound, and flow in ways that most people overlook.</p>
 
-    <h2>The Challenge</h2>
-    <p>The original bedroom was oversized but underdesigned. It had builder-basic carpet, a ceiling fan with no dimming, and no sense of zone or purpose beyond the bed. The homeowners wanted it to feel like a retreat without shrinking the room.</p>
+    <p>A primary suite isn't just where you sleep — it's where you begin and end every single day. It's the first environment your eyes open to in the morning and the last one you carry with you into rest. Most people underestimate how much that room shapes their mood, their energy, and the quality of their sleep. When I approach a primary suite, I approach it with the same rigor I bring to any space in the home — because it deserves it more than most.</p>
 
-    <h2>The Choices We Made</h2>
-    <p>We introduced a deep blue accent wall behind the bed to create a focal point and visually 'hug' the sleeping area. Moroccan-inspired pendant lights replaced the ceiling fan, adding ambient warmth. A blue patterned rug defined the bed zone, and the nightstands were chosen for their warmth — wood tones that contrast the cool wall. Layered bedding in neutral tones keeps it restful.</p>
+    <h2>Start with How You Want to Feel</h2>
+    <p>Before I make a single material selection, I ask one question: how do you want this room to make you feel? Not how do you want it to look — how do you want it to feel. The answer shapes everything that follows. A room designed for calm requires a completely different palette, lighting plan, and material language than a room designed for energy or romance. Most people have never been asked this question about their bedroom, and the answer is almost always immediate. They know. They just haven't had someone help them build toward it.</p>
+    <p>The most common answer I hear is some version of the same thing: I want it to feel like a hotel, but warmer. What people mean is they want the visual quiet of a well-edited space — no clutter, no distraction — combined with the sensory warmth of home. That combination is entirely achievable, and it starts with restraint.</p>
+
+    <h2>Layout & the Hierarchy of the Room</h2>
+    <p>The bed is the anchor of every primary suite, and the entire room should be organized in relationship to it. Where the bed sits determines everything — the placement of lighting, the depth of the nightstands, the sightlines from the doorway, the relationship to windows. I always position the bed so the first thing you see when you walk in is the headboard wall at its best. That moment of arrival sets the tone for the entire room.</p>
+    <p>Beyond the bed, I think carefully about zones. A primary suite should function as more than a place to sleep — it should support a morning routine, an evening wind-down, and ideally some form of personal space, whether that's a reading chair by a window or a small writing surface tucked into a corner. Creating these zones within a single room requires thoughtful furniture selection and placement, but it transforms the space from a single-purpose room into one that genuinely serves your daily life.</p>
+
+    <h2>Lighting Is Everything</h2>
+    <p>Nothing impacts the feel of a bedroom more than its lighting plan, and nothing is more often neglected. A single overhead fixture is almost never the right answer. A well-designed primary suite has at least three layers of light: ambient light for overall illumination, task lighting at each nightstand for reading, and accent lighting to add warmth and dimension — whether that's a table lamp on a dresser, a sconce flanking a mirror, or low-profile cove lighting that washes the ceiling with a soft glow.</p>
+    <p>Dimming is non-negotiable. The ability to lower the light in the evening is one of the most impactful things you can do for the quality of your sleep and the mood of the room. I specify dimmers on every circuit in a primary suite without exception. The difference between a bedroom at full brightness and that same bedroom at thirty percent is the difference between a functional room and a sanctuary.</p>
+
+    <h2>Texture, Softness & the Sense of Rest</h2>
+    <p>The primary suite is where materiality becomes most personal. This is the room where you want layers — bedding with weight and softness, window treatments that fall to the floor, a rug with enough pile to feel grounded when your feet hit it in the morning. These are not decorative choices; they are sensory ones. The goal is to make the room feel enveloping without being heavy.</p>
+    <p>I am particularly deliberate about the headboard wall. This surface sets the visual tone for the entire room and is almost always the first thing visible from the doorway. A well-chosen wall treatment — whether that is paint, wallpaper, upholstered paneling, or a textured plaster — gives the bed context and the room a focal point that everything else can be organized around.</p>
 
     <div class="pullquote">
       <p>The suite now has three distinct moods depending on the lighting — bright and energizing in the morning, warm and golden in the evening, and deeply calm at night. It finally feels like the most important room in the house.</p>
     </div>
 
+    <h2>Editing Is the Final Step</h2>
+    <p>The hardest part of designing a primary suite is knowing what to leave out. Every object in the room competes for your attention, and the bedroom is a place where your attention should be at rest. I always do a final edit — removing anything that doesn't serve the room's purpose or contribute to its feeling. Art should be calming or meaningful, not stimulating. Surfaces should be clear. The closet should be organized enough that its presence doesn't create visual noise.</p>
+    <p>This level of editing takes honesty, but it is what separates a beautiful room from a room that actually delivers on its promise. The goal is not a showroom — it is a space that works for you every single day.</p>
+
+    <div class="article-divider"></div>
+
+    <p class="article-closing">The primary suite is the one room in the house that is entirely yours. It deserves to be designed with intention, built with quality, and edited with care.</p>
+
+    <p class="article-closing">When you get it right, you feel it the moment you walk through the door — and again every morning when you wake up inside it.</p>
+
     <a href="../articles.html" class="article-back">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
       Back to All Articles
     </a>
+
   </div>
 </div>
 
@@ -315,9 +343,6 @@ ul { list-style: none; }
     </div>
   </div>
 </footer>
-
-<!-- Sanity CMS -->
-<script src="../lib/sanity.js"></script>
 
 </body>
 </html>
